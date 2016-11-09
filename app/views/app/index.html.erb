@@ -1,0 +1,106 @@
+<div class="wrap">
+  <section id="main-container" role="main" style="min-height: 522px;">
+    <div id="js-app-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="overlay hide">
+        <div class="spinner"></div>
+    </div>
+    <div id="pjax-modal-container" class="modal-content"></div>
+  </div>
+</div>
+<header class="title-container">
+    <div class="title">
+        <div class="col-md-2">
+            <h1>My Apps</h1>
+        </div>
+        <div class="col-md-10">
+                    </div>
+    </div>
+    <div class="subtitle">
+        <div class="col-md-7">
+            <p style="display: inline-block;">List of created Apps</p>
+            <div style="display: inline-block;font-size: 13px;">
+              <span style="color: #9DBBCD;">- API Key: </span>
+              <div class="secure-key" style="display: inline-block;cursor: pointer;" title="Toggle key">
+                <span class="hide"><%=current_user.user_profile.customer_key%></span>
+                <span>****************************************</span>
+              </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <p class="pull-right">
+                <span>Total <strong><%=@user_sites.length %> Apps</strong></span>
+                <a href="/apps/create" class="btn btn-default" data-pjax-modal><i class="icon icon-create"></i> Create new</a>
+            </p>
+        </div>
+    </div>
+</header>
+<div class="container-fluid">
+        <div class="table-container">
+    <h3>
+        <span class="pull-left">My Apps</span>
+    </h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>App</th>
+                <th>App Key</th>
+                <th>Secret Key</th>
+                <th>Instructions</th>
+                <th class="actions">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @user_sites.each do |site| %>
+          <tr>
+            <td><%=site.app_type %></td>
+              <td>
+                  <abbr class="css-truncate css-truncate-target" title="test"><%=site.app_name||site.domain %></abbr>
+              </td>
+              <td><%=site.site_key %></td>
+              <td>
+              <div class="secure-key" style="display: inline-block;cursor: pointer;" title="Toggle key">
+                <span class="hide"><%=site.private_key %></span>
+                <span>********************</span>
+              </div>
+              </td>
+              <td>
+                  <% if site.app_type == "WEBSITE" || site.app_type == "DISTRIBUTION"%>
+                  <a href="/apps/instructions/<%=site.id %>" style="text-decoration: underline;" data-pjax-modal>Web</a>
+                  <% elsif site.app_type == "MOBILE" %>
+                  <a href="/apps/instructions/<%=site.id %>" style="text-decoration: underline;" data-pjax-modal>SDKs</a>
+                  <% elsif site.app_type == "ONBOARDING" %>
+                  <a href="/apps/instructions/<%=site.id %>" style="text-decoration: underline;" data-pjax-modal>Web + SDKs</a>
+                  <% end %>
+              </td>
+              <td>
+                  <a href="/apps/transactions/<%=site.id %>" class="circle-btn" data-toggle="tooltip" data-placement="top" title="View transactions"><i class="fa fa-search"></i></a>
+                  <a href="/apps/edit/<%=site.id %>" class="circle-btn" data-toggle="tooltip" data-placement="top" title="Edit" data-pjax-modal><i class="fa fa-pencil"></i></a>
+                  <a href="/apps/custom/<%=site.id %>" class="circle-btn" data-toggle="tooltip" data-placement="top" title="Customize" data-pjax-modal><i class="fa fa-cog"></i></a>
+                  <a href="/apps/delete/<%=site.id %>" class="circle-btn js-delete-app" data-toggle="tooltip" data-placement="top" title="Delete"><i class="fa fa-trash-o"></i></a>
+              </td>
+            </tr>
+            <% end %>
+                    </tbody>
+    </table>
+</div>
+
+    </div>
+  </section>
+  <footer role="contentinfo" id="footer">
+    <div class="container-fluid">
+      <div class="row" style="font-size: 12px;">
+        <div class="col-sm-6">
+          <p>Copyright &copy; RingCaptcha 2016. All Rights Reserved.</p>
+        </div>
+        <div class="col-sm-6">
+          <div class="pull-right footer-menu">
+            <a href="javascript:void();" class="js-privacy-popup">Privacy Policy</a>
+            <a href="javascript:void();" class="js-terms-popup">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

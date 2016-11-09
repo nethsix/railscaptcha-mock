@@ -1,0 +1,994 @@
+  [1m[35m (60.8ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (21.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (14.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8148927716711985315);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateUsers (20160929024321)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20160929024321_devise_create_users.rb:3)
+  [1m[35m (55.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "is_active" boolean, "is_super_admin" boolean, "profile_id" integer, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "failed_attempts" integer DEFAULT 0 NOT NULL, "unlock_token" character varying, "locked_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160929024321"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddNameToUsers (20160929024407)
+  [1m[35m (6.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "name" character varying[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160929024407"]]
+  [1m[35m (12.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddRoleToUsers (20160929024614)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "role" integer[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160929024614"]]
+  [1m[35m (12.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseInvitableAddToUsers (20160929025143)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class DeviseInvitableAddToUsers < ActiveRecord::Migration[4.2] (called from load at /Users/nethsix/.rvm/gems/ruby-2.2.3@railscaptcha/bin/rake:23)
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_token" character varying[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_created_at" timestamp[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_sent_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_accepted_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "invitation_limit" integer[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "invited_by_type" character varying[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "invited_by_id" integer[0m
+  [1m[35m (18.7ms)[0m  [1m[35mALTER TABLE "users" ADD "invitations_count" integer DEFAULT 0[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_invitations_count" ON "users"  ("invitations_count")[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_invitation_token" ON "users"  ("invitation_token")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_users_on_invited_by_id" ON "users"  ("invited_by_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160929025143"]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSessions (20160929082359)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20160929082359_create_sessions.rb:9)
+  [1m[35m (25.9ms)[0m  [1m[35mCREATE TABLE "sessions" ("sess_id" serial primary key, "sess_data" character varying(4000) NOT NULL, "sess_time" bigint NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160929082359"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateSites (20161003061237)
+  [1m[35m (6.1ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161003061237_create_sites.rb:3)
+  [1m[35m (24.0ms)[0m  [1m[35mCREATE TABLE "sites" ("id" serial primary key, "domain" character varying(2000), "site_key" character varying(100) NOT NULL, "private_key" character varying(100) NOT NULL, "global_site" character varying(100) NOT NULL, "widget_type" character varying(50) NOT NULL, "app_type" character varying(50) DEFAULT 'WEBSITE' NOT NULL, "user_id" integer NOT NULL, "duplicate_numbers" boolean, "user_geolocation" boolean DEFAULT 't', "white_label" boolean DEFAULT 'f', "custom_audio_dir" character varying(255), "custom_audio_lang" character varying(255), "custom_css_dir" character varying(255), "custom_message" character varying, "custom_sender_id" character varying(50), "inmediate_voice_fallback" boolean DEFAULT 'f' NOT NULL, "use_unicode_support" boolean DEFAULT 'f' NOT NULL, "ad_template" character varying(20), "custom_support_email" character varying(255), "custom_retry_timer" integer, "custom_session_timer" integer, "store_ids" character varying, "app_name" character varying(100), "app_schemes" character varying, "app_data" character varying, "unavailable_platform_fallback_url" character varying, "has_auto_retry" boolean DEFAULT 'f', "deleted_at" timestamp, "artist_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE  INDEX  "index_sites_on_artist_id" ON "sites"  ("artist_id")[0m
+  [1m[35mSQL (4.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161003061237"]]
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeColumnsUserCaptcha (20161003073214)
+  [1m[35m (6.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "address1" character varying(100)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "address2" character varying(100)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "phone" character varying(100)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "city" character varying(100)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "zip_code" character varying(100)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "country" character varying(100)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "company" character varying(100)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "area" character varying(100)[0m
+  [1m[35m (60.3ms)[0m  [1m[35mALTER TABLE "users" ADD "first_login" boolean DEFAULT 't'[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "verification_token" integer[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "verification_counter" integer[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "change_email_temp" character varying(255)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "users" ADD "user_id" integer[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "verification_link_token" character varying(40)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "verification_link_expires_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "registered_ip" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_ip" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "stripe_customer_id" character varying(30)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "stripe_last4" character varying(4)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "stripe_exp_month" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "stripe_exp_year" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "stripe_card_fingerprint" character varying(20)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "stripe_card_cvc_check" character varying(20)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "stripe_card_type" character varying(20)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "stripe_country" character varying(2)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "customer_key" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "customer_secret" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "service_plan_id" integer[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "last_low_credit_notified_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_monthly_charged_at" timestamp[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "has_auto_reload" boolean[0m
+  [1m[35m (6.7ms)[0m  [1m[35mALTER TABLE "users" ADD "auto_reload_amount" decimal(20,6)[0m
+  [1m[35m (19.7ms)[0m  [1m[35mALTER TABLE "users" ADD "account_live_mode" boolean DEFAULT 'f'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "custom_notifications_emails" character varying(255)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "last_min_amount_charged_at" timestamp[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "last_credit_reload_at" timestamp[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "users" ADD "last_min_amount_expired_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "github_id" integer[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "github_access_token" character varying[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "github_username" character varying(255)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "last_autoreload_attempt" timestamp[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "auto_reload_trigger_amount" decimal(20,6)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "sms_count" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "first_transaction_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "attn_name" character varying(100)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "company_name" character varying(100)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "company_address" character varying(100)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "next_counter_reset_at" timestamp[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161003073214"]]
+  [1m[35m (42.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUserAlerts (20161004004454)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004004454_create_user_alerts.rb:3)
+  [1m[35m (23.4ms)[0m  [1m[35mCREATE TABLE "user_alerts" ("id" serial primary key, "user_id" integer, "alert_type" character varying(20), "alert_trigger" character varying(30), "recipient" character varying(50), "subject" character varying(50), "content" character varying, "sent_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004004454"]]
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRingSessions (20161004004956)
+  [1m[35m (45.8ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004004956_create_ring_sessions.rb:3)
+  [1m[35m (13.2ms)[0m  [1m[35mCREATE TABLE "ring_sessions" ("id" serial primary key, "site_key" character varying(100) NOT NULL, "ph_id" integer, "site_id" integer NOT NULL, "challenge_key" character varying(100) NOT NULL, "status" integer, "user_phone" character varying(100), "attempt_counter" integer NOT NULL, "method" integer, "current_service" integer DEFAULT -1, "service_status" integer DEFAULT -1, "validation_code" character varying(255), "loop_widget" smallint DEFAULT -1, "forced_sms" smallint DEFAULT -1, "identification_time" timestamp, "verification_time" timestamp, "expires_at" timestamp, "verification_expires_at" timestamp, "retry_at" timestamp, "verified_waiting" boolean, "copied" boolean DEFAULT 'f', "server_phone" character varying, "user_country" character varying(100), "flag" character varying(10), "tracking_id" character varying(500), "referer" character varying(255), "user_agent" character varying(255), "ip_address" character varying(100) NOT NULL, "city_name" character varying(100), "internet_provider" character varying(255), "user_device" integer, "geo_lat" float, "geo_lng" float, "geo_accuracy" integer, "geo_alt" float, "geo_alt_accuracy" integer, "geolocation" boolean DEFAULT 'f', "culture" character varying(5), "validation_provider" integer, "country_iso" character varying(2), "udid" character varying(50), "failure_counter" integer, "threat_level" character varying(20), "validation_counter" smallint, "amount_charged" decimal(20,6), "verified_with" integer, "original_number" character varying(20), "verification_id" integer, "short_url_hash" character varying(10), "mob_ip" character varying(40), "mob_id" character varying(40), "dist_app_key" character varying(100), "custom_iosid" character varying(20), "custom_androidid" character varying(100), "last_auto_retry_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004004956"]]
+  [1m[35m (12.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateVerificateds (20161004012239)
+  [1m[35m (12.5ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004012239_create_verificateds.rb:3)
+  [1m[35m (39.4ms)[0m  [1m[35mCREATE TABLE "verificateds" ("id" serial primary key, "site_key" character varying(100) NOT NULL, "ph_id" integer, "site_id" integer NOT NULL, "identification_time" timestamp, "verification_time" timestamp, "attempt_counter" integer NOT NULL, "method" integer, "transaction_id" character varying(100), "tracking_id" character varying(500), "referer" character varying(255), "validation_code" character varying(255), "user_agent" character varying(255), "ip_address" character varying(100) NOT NULL, "city_name" character varying(100), "internet_provider" character varying(255), "user_device" integer, "geo_lat" float, "geo_lng" float, "geo_accuracy" integer, "geo_alt" float, "geo_alt_accuracy" integer, "geolocation" boolean DEFAULT 'f', "validation_provider" integer, "transaction_log" integer, "country_iso" character varying(2), "udid" character varying(50), "threat_level" character varying(20), "status" character varying(10), "session_token" character varying(100), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004012239"]]
+  [1m[35m (6.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUserPhones (20161004013056)
+  [1m[35m (6.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004013056_create_user_phones.rb:3)
+  [1m[35m (12.1ms)[0m  [1m[35mCREATE TABLE "user_phones" ("id" serial primary key, "original_number" character varying(100) NOT NULL, "cleaned_number" character varying(100) NOT NULL, "formatted_number" character varying(20), "country_iso" character varying(2), "country_code" character varying(100), "area_code" character varying(5), "block_number" character varying(5), "subscriber_number" character varying(10), "threat_level" character varying(100), "phid" character varying(100), "city_id" integer, "city_name" character varying(100), "neighborhood_name" character varying(100), "geo_lat" float, "geo_lng" float, "geo_accuracy" integer, "geo_alt" float, "geo_alt_accuracy" integer, "zip_code" character varying(10), "q_verification" integer, "is_reported" boolean, "report_counter" integer, "type_of_line" smallint, "phone_type" character varying(30), "operator" character varying(255), "carrier_id" integer, "carrier_mnc" integer, "old_carrier" character varying(100), "old_carrier_mnc" integer, "portability_counter" integer DEFAULT 0, "first_name" character varying(100), "last_name" character varying(100), "address" character varying(255), "facebook_id" character varying(20), "facebook_name" character varying(100), "white_pages_billed" boolean, "white_page_query" timestamp, "last_updated_at" timestamp, "is_valid" boolean, "udid" character varying(50), "carrier_name" character varying(100), "carrier_code" integer, "company_name" character varying(255), "status" character varying(2), "imsi_code" character varying(20), "is_ported" boolean, "cleansed_hash" character varying(64), "original_hash" character varying(64), "cleansed_salt" character varying(24), "original_salt" character varying(24), "cleansed_encrypted" character varying, "formatted_encrypted" character varying, "idx_original" integer, "idx_cleansed" integer, "hlr_last_checked" timestamp, "hlr_last_result" character varying(500), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004013056"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateFeatures (20161004025113)
+  [1m[35m (6.6ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004025113_create_features.rb:3)
+  [1m[35m (19.3ms)[0m  [1m[35mCREATE TABLE "features" ("id" serial primary key, "name" character varying(50), "description" character varying(100), "display_name" character varying(100), "display_desc" character varying(250), "is_active" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004025113"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUserFeatures (20161004025358)
+  [1m[35m (5.6ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004025358_create_user_features.rb:3)
+  [1m[35m (13.8ms)[0m  [1m[35mCREATE TABLE "user_features" ("id" serial primary key, "feature_id" integer, "user_id" integer, "is_active" boolean, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004025358"]]
+  [1m[35m (3.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCredits (20161004025531)
+  [1m[35m (6.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004025531_create_credits.rb:3)
+  [1m[35m (21.6ms)[0m  [1m[35mCREATE TABLE "credits" ("id" serial primary key, "user_id" integer NOT NULL, "amount" decimal(20,6), "amount_free" decimal(20,6), "emergency_balance" decimal(20,6) DEFAULT 0, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004025531"]]
+  [1m[35m (6.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAccountMovs (20161004025748)
+  [1m[35m (6.5ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004025748_create_account_movs.rb:3)
+  [1m[35m (14.4ms)[0m  [1m[35mCREATE TABLE "account_movs" ("id" serial primary key, "user_id" integer NOT NULL, "payment_id" integer, "description" character varying(100), "amount" decimal(20,6), "status" character varying(10), "status_code" smallint, "charge_type" character varying(2), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004025748"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreatePayments (20161004030105)
+  [1m[35m (12.3ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004030105_create_payments.rb:3)
+  [1m[35m (9.9ms)[0m  [1m[35mCREATE TABLE "payments" ("id" serial primary key, "status" integer, "amount" decimal(20,6), "trx_code" character varying(20), "confirmed_at" timestamp, "expires_at" timestamp, "remind" timestamp, "refunded" boolean, "amount_refunded" decimal(20,6), "attn_name" character varying(100), "company_name" character varying(100), "company_address" character varying(100), "invoice_number" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004030105"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateStripeCharges (20161004030917)
+  [1m[35m (11.6ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004030917_create_stripe_charges.rb:3)
+  [1m[35m (13.9ms)[0m  [1m[35mCREATE TABLE "stripe_charges" ("id" serial primary key, "payment_id" integer, "trx_id" character varying(20), "amount" decimal(20,6), "amount_charged" decimal(20,6), "charge_fee" decimal(20,6), "status" character varying(10), "status_code" integer, "card_type" character varying(20), "card_last4" character varying(4), "card_fingerprint" character varying(20), "card_cvc_check" character varying(10), "card_country" character varying(2), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004030917"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateServices (20161004031458)
+  [1m[35m (11.8ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004031458_create_services.rb:3)
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "services" ("id" serial primary key, "name" character varying(45), "created_at" timestamp, "updated_at" timestamp, "service_code" integer DEFAULT 0, "service_class" character varying(50), "display_name" character varying(25), "is_active" boolean DEFAULT 't', "default_price" decimal(20,6) DEFAULT 0, "default_mobile" decimal(20,6) DEFAULT 0, "has_widget" boolean DEFAULT 'f')[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004031458"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateServicePrices (20161004032419)
+  [1m[35m (6.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004032419_create_service_prices.rb:3)
+  [1m[35m (14.3ms)[0m  [1m[35mCREATE TABLE "service_prices" ("id" serial primary key, "service_id" integer NOT NULL, "country_iso" character varying(2), "price" decimal(20,6) DEFAULT 0, "outage_price" decimal(20,6) DEFAULT 0, "phone_type" character varying(30), "service_plan_id" integer)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004032419"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateServicePlans (20161004032727)
+  [1m[35m (6.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004032727_create_service_plans.rb:3)
+  [1m[35m (15.6ms)[0m  [1m[35mCREATE TABLE "service_plans" ("id" serial primary key, "name" character varying(30), "description" character varying(250), "is_default" boolean, "default_mobile" decimal(20,6) DEFAULT 0, "default_landline" decimal(20,6) DEFAULT 0, "is_post_paid" boolean, "monthly_fee" decimal(20,6) DEFAULT 0, "charge_from_credits" boolean, "amount_free" decimal(20,6) DEFAULT 0, "min_amount" decimal(20,6) DEFAULT 0, "max_sms" integer)[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004032727"]]
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCountries (20161004033045)
+  [1m[35m (6.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004033045_create_countries.rb:3)
+  [1m[35m (15.6ms)[0m  [1m[35mCREATE TABLE "countries" ("id" serial primary key, "name" character varying(100), "service_available" boolean, "country_flag" character varying(100), "autodetect" boolean, "country_code" character varying(4), "iso_code" character varying(2), "country_lang" character varying(2), "dialing_info" character varying(250), "process_chain" character varying(250), "valid_until" integer, "dial_example" character varying(20), "child_country_codes" character varying, "default_locale" character varying(5) DEFAULT 'en')[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004033045"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEnabledCountries (20161004034205)
+  [1m[35m (5.9ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004034205_create_enabled_countries.rb:3)
+  [1m[35m (13.3ms)[0m  [1m[35mCREATE TABLE "enabled_countries" ("id" serial primary key, "app_id" integer, "country_iso" character varying(2))[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004034205"]]
+  [1m[35m (6.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCities (20161004034315)
+  [1m[35m (6.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004034315_create_cities.rb:3)
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "cities" ("id" serial primary key, "city_name" character varying(100), "area_code" character varying(10), "country_code" integer, "country_iso" character varying(2))[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004034315"]]
+  [1m[35m (11.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateNumBlocks (20161004034439)
+  [1m[35m (11.5ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004034439_create_num_blocks.rb:3)
+  [1m[35m (21.1ms)[0m  [1m[35mCREATE TABLE "num_blocks" ("id" serial primary key, "country_iso" character varying(2), "country_code" smallint, "area_code" character varying(2), "city_name" character varying(100), "line_type" character varying(50), "block_code" integer, "range_start" smallint, "range_end" smallint, "carrier_name" character varying(255), "company_name" character varying(255), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004034439"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateCarriers (20161004034850)
+  [1m[35m (11.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004034850_create_carriers.rb:3)
+  [1m[35m (15.2ms)[0m  [1m[35mCREATE TABLE "carriers" ("id" serial primary key, "name" character varying(250), "brand_name" character varying(250), "company_name" character varying(250), "logo_img" character varying(100), "country_iso" character varying(2), "main_mccmnc" integer, "alt_mccmnc" character varying(250))[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004034850"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTransactionLogs (20161004035112)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004035112_create_transaction_logs.rb:3)
+  [1m[35m (22.2ms)[0m  [1m[35mCREATE TABLE "transaction_logs" ("id" serial primary key, "service_id" integer, "service_name" character varying(100), "provider_id" integer, "provider_name" character varying(50), "site_id" integer, "user_id" integer, "to_number" character varying(20), "number_id" integer, "country_code" character varying(5), "country_iso" character varying(2), "operator_name" character varying(50), "cost" decimal(20,6), "duration" integer, "status" character varying(10), "transaction_id" character varying(100), "session_id" integer, "amount_charged" decimal(20,6), "refunded" boolean, "amount_refunded" decimal(20,6), "sms_text" character varying(250), "sms_hash" character varying(50), "pin_code" character varying(10), "carrier_mnc" integer, "trx_id" character varying(50), "status_message" character varying(250), "route_id" integer, "cost_checked" boolean, "referer" character varying(255), "udid" character varying(50), "tracking_id" character varying(500), "ip_address" character varying(100), "session_token" character varying(100), "user_agent" character varying(255), "message_length" integer, "message_count" integer, "is_unicode" integer, "total_cost" decimal(20,6), "phone_processing_cost" decimal(20,6), "phone_processing_price" decimal(20,6), "provider_cost_id" integer, "processors_list" character varying(255), "outage_route" boolean, "app_key" character varying(100), "attempt" integer, "city_name" character varying(100), "geo_lat" float, "geo_lng" float, "geo_accuracy" integer, "geo_alt" float, "geo_alt_accuracy" integer, "geolocation" boolean DEFAULT 'f', "sender_id" character varying(20), "culture" character varying(20), "delivery_mode" character varying(15), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004035112"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateServiceProviders (20161004040653)
+  [1m[35m (6.3ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004040653_create_service_providers.rb:3)
+  [1m[35m (15.6ms)[0m  [1m[35mCREATE TABLE "service_providers" ("id" serial primary key, "name" character varying, "provider_class_name" character varying, "user_account" character varying, "token_pass" character varying, "api_id" character varying, "status" integer, "error_counter" integer, "currency" character varying(3), "supports_unicode" boolean, "supports_sender_id" boolean DEFAULT 'f', "is_active" boolean, "no_fallback_errors" character varying, "user_id" integer, "timeout_ms" integer DEFAULT 0, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004040653"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProviderPhoneNumbers (20161004044135)
+  [1m[35m (12.5ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004044135_create_provider_phone_numbers.rb:3)
+  [1m[35m (25.6ms)[0m  [1m[35mCREATE TABLE "provider_phone_numbers" ("id" serial primary key, "name" character varying(30), "number" character varying(15), "formatted_number" character varying(20), "country_iso" character varying(2), "supports_int_calls" boolean DEFAULT 't', "is_active" boolean DEFAULT 't', "provider_id" integer, "service_id" integer, "locked_until" timestamp)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004044135"]]
+  [1m[35m (6.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProviderConfigs (20161004044410)
+  [1m[35m (11.7ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004044410_create_provider_configs.rb:3)
+  [1m[35m (34.3ms)[0m  [1m[35mCREATE TABLE "provider_configs" ("id" serial primary key, "provider_id" integer, "alt_provider" integer, "smart_provider" integer, "service_id" integer, "is_default" boolean, "cost" decimal(20,6), "fraction_mode" character varying, "priority" integer, "country_iso" character varying(2), "area_code" character varying(5), "phone_type" character varying(30), "carrier_mnc" integer, "smart_route_enabled" boolean, "company_name" character varying(255), "user_id" integer, "outage_route" integer, "is_outage_route" boolean, "has_unicode_support" boolean DEFAULT 'f' NOT NULL, "has_sender_id_support" boolean DEFAULT 'f' NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004044410"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProviderCosts (20161004044951)
+  [1m[35m (11.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004044951_create_provider_costs.rb:3)
+  [1m[35m (22.1ms)[0m  [1m[35mCREATE TABLE "provider_costs" ("id" serial primary key, "service_id" integer, "country_iso" character varying(2), "phone_type" character varying(15), "mccmnc" integer, "provider_id" integer, "cost" decimal(20,6) DEFAULT 0 NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004044951"]]
+  [1m[35m (11.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateBlacklists (20161004045142)
+  [1m[35m (12.1ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004045142_create_blacklists.rb:3)
+  [1m[35m (15.4ms)[0m  [1m[35mCREATE TABLE "blacklists" ("id" serial primary key, "cleaned_number" character varying(15), "is_active" smallint, "blacklisted_at" timestamp, "blacklisted_until" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, "blacklist_reason" character varying(50), "comments" character varying(250), "site_id" integer)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004045142"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateWhitelists (20161004045339)
+  [1m[35m (5.6ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004045339_create_whitelists.rb:3)
+  [1m[35m (19.1ms)[0m  [1m[35mCREATE TABLE "whitelists" ("id" serial primary key, "cleansed_number" integer, "verifications_allowed" integer, "description" character varying(250), "whitelisted_at" timestamp, "whitelisted_until" timestamp, "site_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004045339"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateRouteChanges (20161004045537)
+  [1m[35m (6.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161004045537_create_route_changes.rb:3)
+  [1m[35m (19.0ms)[0m  [1m[35mCREATE TABLE "route_changes" ("id" serial primary key, "route_id" integer, "from_provider" integer, "to_provider" integer, "from_smart" integer, "to_smart" integer, "from_fallback" integer, "to_fallback" integer, "explanation" character varying(255), "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161004045537"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddConfirmableToDevise (20161014072351)
+  [1m[35m (5.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmation_token" character varying[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmed_at" timestamp[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "confirmation_sent_at" timestamp[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "unconfirmed_email" character varying[0m
+  [1m[35m (17.5ms)[0m  [1m[33mUPDATE users SET confirmed_at = NOW()[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_confirmation_token" ON "users"  ("confirmation_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161014072351"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUserProfiles (20161019074556)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161019074556_create_user_profiles.rb:3)
+  [1m[35m (27.7ms)[0m  [1m[35mCREATE TABLE "user_profiles" ("id" serial primary key, "address1" character varying(200), "address2" character varying(200), "phone" character varying(200), "city" character varying(200), "zip_code" character varying(200), "country" character varying(200), "company" character varying(200), "role" character varying(200), "area" character varying(200), "first_login" integer, "verification_token" bigint, "verification_counter" bigint, "user_id" bigint, "change_email_temp" character varying(510), "verification_link_token" character varying(80), "verification_link_expires_at" timestamp, "registered_ip" character varying, "last_ip" character varying, "customer_stripe_id" character varying(60), "stripe_last4" character varying(4), "stripe_exp_month" bigint, "stripe_exp_year" bigint, "stripe_card_fingerprint" character varying(40), "stripe_card_cvc_check" character varying(20), "stripe_card_type" character varying(40), "stripe_country" character varying(4), "customer_key" character varying, "customer_secret" character varying, "service_plan_id" bigint, "last_low_credit_notified_at" timestamp, "last_monthly_charged_at" timestamp, "has_auto_reload" integer, "auto_reload_amount" float, "account_live_mode" integer, "custom_notifications_emails" character varying(510), "login_type" character varying(510), "github_access_token" character varying, "github_id" bigint, "last_min_amount_charged_at" timestamp, "last_credit_reload_at" timestamp, "last_min_amount_expired_at" timestamp, "github_username" character varying(510), "previous_service_plan" character varying(40), "last_autoreload_attempt" timestamp, "auto_reload_trigger_amount" float, "first_transaction_at" timestamp, "sms_count" bigint, "attn_name" character varying(510), "company_name" character varying(510), "company_address" character varying(510), "next_counter_reset_at" timestamp, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161019074556"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to ChangeConstraintLists (20161024033813)
+  [1m[35m (11.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (20.4ms)[0m  [1m[35mALTER TABLE whitelists DROP CONSTRAINT whitelist_cleansed_number_site_id_key;[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(8148927716711985315)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(8148927716711985315);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to ChangeConstraintLists (20161024033813)
+  [1m[35m (8.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (34.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161024033813"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddMetrics (20161027053224)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+DEPRECATION WARNING: #table_exists? currently checks both tables and views. This behavior is deprecated and will be changed with Rails 5.1 to only check tables. Use #data_source_exists? instead. (called from change at /Users/nethsix/projects/heavy/railscaptcha/db/migrate/20161027053224_add_metrics.rb:3)
+  [1m[35m (38.8ms)[0m  [1m[35mCREATE TABLE "metrics" ("id" serial primary key, "app" character varying(200) NOT NULL, "country" character varying(3) NOT NULL, "timestamp" timestamp NOT NULL, "verified_numbers" integer NOT NULL, "unique_numbers" integer NOT NULL, "total_transactions" integer NOT NULL, "total_spend" float NOT NULL, "latency" float, "app_id" integer NOT NULL, "total_gateway_transactions" integer NOT NULL, "total_gateway_spend" float NOT NULL, "success_gateway_transactions" integer NOT NULL)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20161027053224"]]
+  [1m[35m (17.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.0ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (24.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-11-02 12:05:04 UTC], ["updated_at", 2016-11-02 12:05:04 UTC]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(8148927716711985315)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'account_movs'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (3.1ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'blacklists'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'carriers'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'cities'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'countries'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'credits'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'enabled_countries'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'features'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'metrics'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'num_blocks'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'payments'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'provider_configs'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'provider_costs'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'provider_phone_numbers'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'ring_sessions'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'route_changes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'service_plans'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'service_prices'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'service_providers'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'services'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'sessions'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'sites'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'stripe_charges'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'transaction_logs'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'user_alerts'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'user_features'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'user_phones'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'user_profiles'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'verificateds'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'whitelists'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+Started GET "/" for 127.0.0.1 at 2016-11-02 21:21:21 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by VisitorsController#index as HTML
+  Rendering visitors/index.html.erb within layouts/application
+  [1m[35m (17.5ms)[0m  [1m[34mSELECT MAX("users"."id") FROM "users"[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT MAX("users"."id") FROM "users"[0m
+  [1m[36mUserProfile Load (6.0ms)[0m  [1m[34mSELECT  "user_profiles".* FROM "user_profiles" WHERE "user_profiles"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (12.1ms)[0m  [1m[31mROLLBACK[0m
+  Rendered visitors/index.html.erb within layouts/application (861.7ms)
+  Rendered layouts/_messages.html.haml (3.8ms)
+Completed 200 OK in 13159ms (Views: 13083.7ms | ActiveRecord: 48.8ms)
+
+
+Started GET "/test" for 127.0.0.1 at 2016-11-02 21:24:25 +0900
+Processing by AppController#test as HTML
+Completed 401 Unauthorized in 12ms (ActiveRecord: 0.0ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2016-11-02 21:24:25 +0900
+Processing by Devise::SessionsController#new as HTML
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT MAX("users"."id") FROM "users"[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT MAX("users"."id") FROM "users"[0m
+  [1m[36mUserProfile Load (0.6ms)[0m  [1m[34mSELECT  "user_profiles".* FROM "user_profiles" WHERE "user_profiles"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  Rendering devise/sessions/new.html.erb within layouts/application
+  Rendered devise/sessions/new.html.erb within layouts/application (3.2ms)
+  Rendered layouts/_messages.html.haml (2.4ms)
+Completed 200 OK in 339ms (Views: 166.8ms | ActiveRecord: 14.2ms)
+
+
+Started GET "/test" for 127.0.0.1 at 2016-11-02 21:24:55 +0900
+
+SyntaxError - syntax error, unexpected [, expecting keyword_do or '{' or '('
+  before_action :authenticate_user!, except [:test]
+                                             ^:
+  app/controllers/app_controller.rb:5:in `'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:477:in `load'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:477:in `block in load_file'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:662:in `new_constants_in'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:476:in `load_file'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:375:in `block in require_or_load'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:37:in `block in load_interlock'
+  activesupport (5.0.0.1) lib/active_support/dependencies/interlock.rb:12:in `block in loading'
+  activesupport (5.0.0.1) lib/active_support/concurrency/share_lock.rb:117:in `exclusive'
+  activesupport (5.0.0.1) lib/active_support/dependencies/interlock.rb:11:in `loading'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:37:in `load_interlock'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:358:in `require_or_load'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:511:in `load_missing_constant'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:203:in `const_missing'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:268:in `const_get'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:268:in `block in constantize'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:266:in `each'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:266:in `inject'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:266:in `constantize'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:583:in `get'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:614:in `constantize'
+  actionpack (5.0.0.1) lib/action_dispatch/http/request.rb:93:in `controller_class'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:30:in `serve'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:26:in `each'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:26:in `serve'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:725:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (2.0.1) lib/rack/etag.rb:25:in `call'
+  rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+  rack (2.0.1) lib/rack/head.rb:12:in `call'
+  rack (2.0.1) lib/rack/session/abstract/id.rb:222:in `context'
+  rack (2.0.1) lib/rack/session/abstract/id.rb:216:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+  activerecord (5.0.0.1) lib/active_record/migration.rb:552:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+  web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+  web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `block in tagged'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `tagged'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `call'
+  sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+  rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+  rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+  activesupport (5.0.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+  rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+  railties (5.0.0.1) lib/rails/engine.rb:522:in `call'
+  puma (3.6.0) lib/puma/configuration.rb:225:in `call'
+  puma (3.6.0) lib/puma/server.rb:578:in `handle_request'
+  puma (3.6.0) lib/puma/server.rb:415:in `process_client'
+  puma (3.6.0) lib/puma/server.rb:275:in `block in run'
+  puma (3.6.0) lib/puma/thread_pool.rb:116:in `call'
+  puma (3.6.0) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+
+Started POST "/__better_errors/d7c4ef681cce58f3/variables" for 127.0.0.1 at 2016-11-02 21:24:56 +0900
+Started GET "/test" for 127.0.0.1 at 2016-11-02 21:27:44 +0900
+Processing by AppController#test as HTML
+  Rendering app/test.html.haml within layouts/dashboard
+  Rendered app/test.html.haml within layouts/dashboard (4.0ms)
+Completed 500 Internal Server Error in 256ms (ActiveRecord: 0.0ms)
+
+
+DEPRECATION WARNING: #original_exception is deprecated. Use #cause instead. (called from initialize at /Users/nethsix/.rvm/gems/ruby-2.2.3@railscaptcha/gems/better_errors-2.1.1/lib/better_errors/raised_exception.rb:7)
+DEPRECATION WARNING: #original_exception is deprecated. Use #cause instead. (called from initialize at /Users/nethsix/.rvm/gems/ruby-2.2.3@railscaptcha/gems/better_errors-2.1.1/lib/better_errors/raised_exception.rb:8)
+
+NoMethodError - undefined method `user_profile' for nil:NilClass:
+  app/views/layouts/dashboard.html.haml:146:in `_app_views_layouts_dashboard_html_haml___572250127897926434_70229642464920'
+  actionview (5.0.0.1) lib/action_view/template.rb:158:in `block in render'
+  activesupport (5.0.0.1) lib/active_support/notifications.rb:166:in `instrument'
+  actionview (5.0.0.1) lib/action_view/template.rb:348:in `instrument'
+  actionview (5.0.0.1) lib/action_view/template.rb:156:in `render'
+  actionview (5.0.0.1) lib/action_view/renderer/template_renderer.rb:66:in `render_with_layout'
+  actionview (5.0.0.1) lib/action_view/renderer/template_renderer.rb:52:in `render_template'
+  actionview (5.0.0.1) lib/action_view/renderer/template_renderer.rb:14:in `render'
+  actionview (5.0.0.1) lib/action_view/renderer/renderer.rb:42:in `render_template'
+  actionview (5.0.0.1) lib/action_view/renderer/renderer.rb:23:in `render'
+  actionview (5.0.0.1) lib/action_view/rendering.rb:103:in `_render_template'
+  actionpack (5.0.0.1) lib/action_controller/metal/streaming.rb:217:in `_render_template'
+  actionview (5.0.0.1) lib/action_view/rendering.rb:83:in `render_to_body'
+  actionpack (5.0.0.1) lib/action_controller/metal/rendering.rb:52:in `render_to_body'
+  actionpack (5.0.0.1) lib/action_controller/metal/renderers.rb:144:in `render_to_body'
+  actionpack (5.0.0.1) lib/abstract_controller/rendering.rb:26:in `render'
+  actionpack (5.0.0.1) lib/action_controller/metal/rendering.rb:36:in `render'
+  actionpack (5.0.0.1) lib/action_controller/metal/instrumentation.rb:44:in `block (2 levels) in render'
+  activesupport (5.0.0.1) lib/active_support/core_ext/benchmark.rb:12:in `block in ms'
+  /Users/nethsix/.rvm/rubies/ruby-2.2.3/lib/ruby/2.2.0/benchmark.rb:303:in `realtime'
+  activesupport (5.0.0.1) lib/active_support/core_ext/benchmark.rb:12:in `ms'
+  actionpack (5.0.0.1) lib/action_controller/metal/instrumentation.rb:44:in `block in render'
+  actionpack (5.0.0.1) lib/action_controller/metal/instrumentation.rb:87:in `cleanup_view_runtime'
+  activerecord (5.0.0.1) lib/active_record/railties/controller_runtime.rb:25:in `cleanup_view_runtime'
+  actionpack (5.0.0.1) lib/action_controller/metal/instrumentation.rb:43:in `render'
+  actionpack (5.0.0.1) lib/action_controller/metal/implicit_render.rb:36:in `default_render'
+  actionpack (5.0.0.1) lib/action_controller/metal/basic_implicit_render.rb:4:in `block in send_action'
+  actionpack (5.0.0.1) lib/action_controller/metal/basic_implicit_render.rb:4:in `tap'
+  actionpack (5.0.0.1) lib/action_controller/metal/basic_implicit_render.rb:4:in `send_action'
+  actionpack (5.0.0.1) lib/abstract_controller/base.rb:188:in `process_action'
+  actionpack (5.0.0.1) lib/action_controller/metal/rendering.rb:30:in `process_action'
+  actionpack (5.0.0.1) lib/abstract_controller/callbacks.rb:20:in `block in process_action'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:126:in `call'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:126:in `call'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:506:in `block (2 levels) in compile'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:455:in `call'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:455:in `call'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:101:in `__run_callbacks__'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:750:in `_run_process_action_callbacks'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+  actionpack (5.0.0.1) lib/abstract_controller/callbacks.rb:19:in `process_action'
+  actionpack (5.0.0.1) lib/action_controller/metal/rescue.rb:20:in `process_action'
+  actionpack (5.0.0.1) lib/action_controller/metal/instrumentation.rb:32:in `block in process_action'
+  activesupport (5.0.0.1) lib/active_support/notifications.rb:164:in `block in instrument'
+  activesupport (5.0.0.1) lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+  activesupport (5.0.0.1) lib/active_support/notifications.rb:164:in `instrument'
+  actionpack (5.0.0.1) lib/action_controller/metal/instrumentation.rb:30:in `process_action'
+  actionpack (5.0.0.1) lib/action_controller/metal/params_wrapper.rb:248:in `process_action'
+  activerecord (5.0.0.1) lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+  actionpack (5.0.0.1) lib/abstract_controller/base.rb:126:in `process'
+  actionview (5.0.0.1) lib/action_view/rendering.rb:30:in `process'
+  actionpack (5.0.0.1) lib/action_controller/metal.rb:190:in `dispatch'
+  actionpack (5.0.0.1) lib/action_controller/metal.rb:262:in `dispatch'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:26:in `each'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:26:in `serve'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:725:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (2.0.1) lib/rack/etag.rb:25:in `call'
+  rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+  rack (2.0.1) lib/rack/head.rb:12:in `call'
+  rack (2.0.1) lib/rack/session/abstract/id.rb:222:in `context'
+  rack (2.0.1) lib/rack/session/abstract/id.rb:216:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+  activerecord (5.0.0.1) lib/active_record/migration.rb:552:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+  web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+  web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `block in tagged'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `tagged'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `call'
+  sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+  rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+  rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+  activesupport (5.0.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+  rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+  railties (5.0.0.1) lib/rails/engine.rb:522:in `call'
+  puma (3.6.0) lib/puma/configuration.rb:225:in `call'
+  puma (3.6.0) lib/puma/server.rb:578:in `handle_request'
+  puma (3.6.0) lib/puma/server.rb:415:in `process_client'
+  puma (3.6.0) lib/puma/server.rb:275:in `block in run'
+  puma (3.6.0) lib/puma/thread_pool.rb:116:in `call'
+  puma (3.6.0) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+
+Started POST "/__better_errors/676c62c6dd446f38/variables" for 127.0.0.1 at 2016-11-02 21:27:45 +0900
+Started GET "/test" for 127.0.0.1 at 2016-11-02 21:28:34 +0900
+
+SyntaxError - syntax error, unexpected ':', expecting keyword_end
+    layout: :none
+           ^:
+  app/controllers/app_controller.rb:16:in `'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:477:in `load'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:477:in `block in load_file'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:662:in `new_constants_in'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:476:in `load_file'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:375:in `block in require_or_load'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:37:in `block in load_interlock'
+  activesupport (5.0.0.1) lib/active_support/dependencies/interlock.rb:12:in `block in loading'
+  activesupport (5.0.0.1) lib/active_support/concurrency/share_lock.rb:117:in `exclusive'
+  activesupport (5.0.0.1) lib/active_support/dependencies/interlock.rb:11:in `loading'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:37:in `load_interlock'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:358:in `require_or_load'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:511:in `load_missing_constant'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:203:in `const_missing'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:268:in `const_get'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:268:in `block in constantize'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:266:in `each'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:266:in `inject'
+  activesupport (5.0.0.1) lib/active_support/inflector/methods.rb:266:in `constantize'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:583:in `get'
+  activesupport (5.0.0.1) lib/active_support/dependencies.rb:614:in `constantize'
+  actionpack (5.0.0.1) lib/action_dispatch/http/request.rb:93:in `controller_class'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:30:in `serve'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:26:in `each'
+  actionpack (5.0.0.1) lib/action_dispatch/journey/router.rb:26:in `serve'
+  actionpack (5.0.0.1) lib/action_dispatch/routing/route_set.rb:725:in `call'
+  warden (1.2.6) lib/warden/manager.rb:35:in `block in call'
+  warden (1.2.6) lib/warden/manager.rb:34:in `catch'
+  warden (1.2.6) lib/warden/manager.rb:34:in `call'
+  rack (2.0.1) lib/rack/etag.rb:25:in `call'
+  rack (2.0.1) lib/rack/conditional_get.rb:25:in `call'
+  rack (2.0.1) lib/rack/head.rb:12:in `call'
+  rack (2.0.1) lib/rack/session/abstract/id.rb:222:in `context'
+  rack (2.0.1) lib/rack/session/abstract/id.rb:216:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+  activerecord (5.0.0.1) lib/active_record/migration.rb:552:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+  activesupport (5.0.0.1) lib/active_support/callbacks.rb:90:in `run_callbacks'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:84:in `protected_app_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:79:in `better_errors_call'
+  better_errors (2.1.1) lib/better_errors/middleware.rb:57:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+  web-console (3.4.0) lib/web_console/middleware.rb:135:in `call_app'
+  web-console (3.4.0) lib/web_console/middleware.rb:28:in `block in call'
+  web-console (3.4.0) lib/web_console/middleware.rb:18:in `catch'
+  web-console (3.4.0) lib/web_console/middleware.rb:18:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:36:in `call_app'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `block in call'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `block in tagged'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (5.0.0.1) lib/active_support/tagged_logging.rb:70:in `tagged'
+  railties (5.0.0.1) lib/rails/rack/logger.rb:24:in `call'
+  sprockets-rails (3.2.0) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+  rack (2.0.1) lib/rack/method_override.rb:22:in `call'
+  rack (2.0.1) lib/rack/runtime.rb:22:in `call'
+  activesupport (5.0.0.1) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/executor.rb:12:in `call'
+  actionpack (5.0.0.1) lib/action_dispatch/middleware/static.rb:136:in `call'
+  rack (2.0.1) lib/rack/sendfile.rb:111:in `call'
+  railties (5.0.0.1) lib/rails/engine.rb:522:in `call'
+  puma (3.6.0) lib/puma/configuration.rb:225:in `call'
+  puma (3.6.0) lib/puma/server.rb:578:in `handle_request'
+  puma (3.6.0) lib/puma/server.rb:415:in `process_client'
+  puma (3.6.0) lib/puma/server.rb:275:in `block in run'
+  puma (3.6.0) lib/puma/thread_pool.rb:116:in `call'
+  puma (3.6.0) lib/puma/thread_pool.rb:116:in `block in spawn_thread'
+
+Started POST "/__better_errors/b0b9ee6918ef15bd/variables" for 127.0.0.1 at 2016-11-02 21:28:34 +0900
+Started GET "/test" for 127.0.0.1 at 2016-11-02 21:29:14 +0900
+Processing by AppController#test as HTML
+  Rendering app/test.html.haml
+  Rendered app/test.html.haml (0.8ms)
+Completed 200 OK in 5ms (Views: 4.0ms | ActiveRecord: 0.0ms)
+
+

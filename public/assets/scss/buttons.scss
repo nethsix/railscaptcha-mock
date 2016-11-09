@@ -1,0 +1,178 @@
+//
+// Buttons
+// --------------------------------------------------
+
+a[class^='btn-icon'] {
+	@include image-by-text(-180px, -70px, 30px, 30px, inline-block);
+	&:hover {
+		background-position: -150px -70px;
+	}
+}
+a.btn-icon-edit {
+	background-position: -180px -100px;
+	&:hover {
+		background-position: -150px -100px;
+	}
+}
+.btn-github,
+.btn-facebook {
+  font-size: .95rem;
+  font-weight: bold;
+  padding: 6px 0;
+  &:before {
+    content: "";
+    line-height: inherit;
+    vertical-align: middle;
+  }
+}
+.btn-github {
+  @include button-variant($text-color, $white, $blueLighterBorder);
+  &:before {
+    margin-right:3px;
+  	@include image-by-text(-100px, -175px, 13px, 13px, inline-block);
+  }
+}
+.btn-facebook {
+  @include button-variant($white, #507cbe, darken(#507cbe, 8%));
+  &:before {
+  	@include image-by-text(-100px, -150px, 13px, 13px, inline-block);
+  }
+}
+//
+.btn-date {
+  @include button-variant($white, $blueDark, lighten($blueDark, 8%));
+  overflow: hidden;
+  position: relative;
+  text-indent: -999px;
+  width: 38px;
+  &:before {
+    @include image-by-text(-75px, -200px, 25px, 25px, block);
+    content: "";
+    line-height: inherit;
+    vertical-align: middle;
+    position: absolute;
+    top: 50%;
+    margin-top: -12.5px;
+    left: 6.5px;
+  }
+}
+
+.btn-instructions {
+  color: $white;
+  text-decoration: underline;
+  text-transform: none;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+
+.btn-refresh {
+  @include image-by-text(-100px, -200px, 25px, 25px, inline-block);
+  border: none;
+  overflow: hidden;
+  text-indent: -999px;
+}
+
+.rockstar-badge {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  width: 190px;
+  margin-top: 15px;
+  margin-left: 25px;
+  padding: 1px 6px;
+  float: left;
+  border: 1px solid #fe0;
+  border-radius: 4px;
+  background-color: #263b45;
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.29), rgba(92, 92, 92, 0));
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.29), rgba(92, 92, 92, 0));
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 3px 0px;
+  color: #fff000;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #000;
+    color: #fff000;
+    text-decoration: none;
+  }
+  &.active {
+    border-color: yellow;
+    background-color: yellow;
+    background-image: none;
+    background-position: 0% 0%;
+    background-size: auto;
+    background-repeat: repeat;
+    background-attachment: scroll;
+    box-shadow: rgba(0, 0, 0, 0.29) 0px 0px 10px 0px inset;
+    color: #2d3133;
+    font-weight: 700;
+    text-align: center;
+  }
+}
+
+.rockstar-text {
+  display: inline-block;
+  padding: 2px 8px 2px 3px;
+  border-radius: 4px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.become {
+  text-shadow: black 0px -1px 0px;
+}
+
+.github-btn {
+  display: inline-block;
+  padding: 4px 15px;
+  background-color: #000;
+  color: #FFF;
+  text-align: center;
+  text-decoration: none;
+  &.github-btn3 {
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 5px;
+    background-color: #CC5247;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  &.github-btn-small {
+    width: auto;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    padding: 0px 25px 0px 10px;
+    background-color: #2D3133;
+    font-size: 14px;
+  }
+  &:hover {
+    color: #FFF;
+  }
+}
+
+.github-btn-icon {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    float: left;
+  }
+
+.github-btn-text {
+  margin-left: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 20px;
+  float: left;
+  border-left: 1px solid #879399;
+  font-size: 18px;
+  letter-spacing: 1px;
+  line-height: 18px;
+}

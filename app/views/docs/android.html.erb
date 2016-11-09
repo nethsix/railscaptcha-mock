@@ -1,0 +1,465 @@
+<div class="wrap">
+  <section id="main-container" role="main" style="min-height: 522px;">
+    <header class="title-container">
+		<div class="title">
+		<div class="col-sm-3">
+			<h1>Documentation</h1>
+		</div>
+		<div class="col-sm-9">
+					</div>
+	</div>
+		<div class="subtitle">
+				<div class="col-sm-9">
+			<p>Get Started in less than a minute</p>
+		</div>
+			</div>
+</header>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="wrapper-collapsed wrapper-documentation">
+				<div class="row">
+					<article class="col-sm-9" ng-non-bindable><div class="documentation-text" ng-non-bindable>
+
+      <h1><b>Android Documentation</b></h1>
+      <hr>
+
+      <h2>Installing the SDK with Android Studio / Gradle</h2>
+
+      <div class="w-embed w-video box-video">
+        <iframe class="embedly-embed" src="https://cdn.embedly.com/widgets/media.html?src=http%3A%2F%2Fwww.youtube.com%2Fembed%2FA-ei5bG6fqM%3Ffeature%3Doembed&amp;url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DA-ei5bG6fqM&amp;image=http%3A%2F%2Fi.ytimg.com%2Fvi%2FA-ei5bG6fqM%2Fhqdefault.jpg&amp;key=c4e54deccf4d4ec997a64902e9a30300&amp;type=text%2Fhtml&amp;schema=youtube" scrolling="no" frameborder="0" allowfullscreen="1"></iframe>
+      </div>
+
+      <br/>
+
+      <p>To install the library inside Android Studio, you can simply declare it as dependency in your build.gradle file. You will need to first add the following repository where the .aar is published to.</p>
+
+      <div class="highlight copyable">
+        <pre class="code"><code>repositories {
+    maven { url 'http://ringcaptcha.github.io/ringcaptcha-android'}
+}</code></pre>
+      </div>
+
+      <p>Next, just include it in your list of dependencies, make sure to use always the latest available version.</p>
+
+      <div class="highlight copyable">
+        <pre class="code"><code>dependencies {
+    compile 'com.thrivecom:ringcaptcha:1.0.7@aar'
+}</code></pre>
+      </div>
+
+      <p>Once you've updated your build.gradle file, you can force Android Studio to sync with your new configuration by clicking the "Sync Project with Gradle Files" icon at the top of the window. This should download the aar dependency at which point you'll have access to the RingCaptcha library.</p>
+
+    	<h2>Installing the SDK Manually</h2>
+
+      <br/>
+
+    	<p>To embed the SDK just drag &amp; drop the <a href="https://github.com/ringcaptcha/ringcaptcha-android/archive/master.zip">Android SDK library</a> into your libs folder of your project on your favorite IDE.</p>
+
+      <p>This will copy the folder straight into your libs section, including the <b>assets</b> and <b>res</b> folders. You will need to merge the contents of the folders <b>assets</b> and <b>res</b> with your project's respective folders so the activity views can be loaded. </p>
+
+      <p>Once the SDK has been included in your app, add the following permissions, activities and SMS Broadcaster to your application <b>AndroidManifest.xml</b> file. The SMS Broadcaster (SMS_RECEIVED) will automatically read the SMS and throw an event with the PIN code.</p>
+
+      <div class="highlight copyable">
+      	<pre class="code"><code>//AndroidManifest.xml file to merge
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.example.sampleapp&quot;
+    android:versionCode=&quot;1&quot;
+    android:versionName=&quot;1.0&quot;
+    android:hardwareAccelerated=&quot;true&quot; &gt;
+
+    &lt;uses-sdk
+        android:minSdkVersion=&quot;7&quot;
+        android:targetSdkVersion=&quot;17&quot; /&gt;
+
+    &lt;!-- ringcaptcha sdk permissions --&gt;
+    &lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.RECEIVE_SMS&quot; /&gt;
+    &lt;uses-permission android:name=&quot;android.permission.READ_SMS&quot; /&gt;
+
+    &lt;application
+        android:allowBackup=&quot;true&quot;
+        android:icon=&quot;@drawable/icon&quot;
+        android:label=&quot;@string/app_name&quot;
+        android:hardwareAccelerated=&quot;true&quot;
+        android:theme=&quot;@style/AppTheme&quot;&gt;
+        &lt;activity
+            android:name=&quot;com.example.sampleapp.MainActivity&quot;
+            android:label=&quot;@string/app_name&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+
+            &lt;intent-filter&gt;
+                &lt;action android:name="android.intent.action.VIEW" /&gt;
+                &lt;category android:name="android.intent.category.DEFAULT" /&gt;
+                &lt;category android:name="android.intent.category.BROWSABLE" /&gt;
+                &lt;data
+                    android:scheme="yourAppScheme"
+                    android:host="ringcaptcha" /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+
+        &lt;!-- ringcaptcha sdk activities|receivers --&gt;
+        &lt;activity
+            android:name=&quot;com.thrivecom.ringcaptcha.SetNumberActivity&quot;
+            android:configChanges=&quot;orientation|keyboardHidden|keyboard|screenSize&quot;
+            android:windowSoftInputMode=&quot;stateVisible|adjustPan|adjustResize&quot;
+            android:screenOrientation=&quot;sensor&quot;&gt;
+        &lt;/activity&gt;
+
+        &lt;activity
+            android:name=&quot;com.thrivecom.ringcaptcha.HelpActivity&quot;
+            android:configChanges=&quot;orientation|keyboardHidden&quot;
+            android:screenOrientation=&quot;sensor&quot;&gt;
+        &lt;/activity&gt;
+        &lt;activity
+            android:name=&quot;com.thrivecom.ringcaptcha.VerifyActivity&quot;
+            android:configChanges=&quot;orientation|keyboardHidden&quot;
+            android:screenOrientation=&quot;sensor&quot;&gt;
+        &lt;/activity&gt;
+        &lt;activity
+            android:name=&quot;com.thrivecom.ringcaptcha.CountryListActivity&quot;
+            android:configChanges=&quot;orientation|keyboardHidden&quot;
+            android:screenOrientation=&quot;sensor&quot;&gt;
+        &lt;/activity&gt;
+
+         &lt;activity
+            android:name=&quot;com.thrivecom.ringcaptcha.OnboardActivity&quot;
+            android:configChanges=&quot;orientation|keyboardHidden&quot;
+            android:screenOrientation=&quot;sensor&quot;&gt;
+        &lt;/activity&gt;
+
+        &lt;activity
+            android:name=&quot;com.thrivecom.ringcaptcha.CodeActivity&quot;
+            android:configChanges=&quot;orientation|keyboardHidden&quot;
+            android:screenOrientation=&quot;sensor&quot;
+            android:windowSoftInputMode=&quot;stateVisible|adjustPan|adjustResize&quot;&gt;
+        &lt;/activity&gt;
+
+        &lt;receiver
+            android:name=&quot;com.thrivecom.ringcaptcha.RingcaptchaAPIController&quot;
+            android:enabled=&quot;true&quot;
+            android:exported=&quot;true&quot; &gt;
+            &lt;intent-filter android:priority=&quot;999&quot;&gt;
+                &lt;action
+                    android:name=&quot;android.provider.Telephony.SMS_RECEIVED&quot;
+                    android:scheme=&quot;sms&quot; /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/receiver&gt;
+    &lt;/application&gt;
+
+&lt;/manifest&gt;</code></pre></div>
+
+      <p class="text-center"><a class="btn btn-default" href="https://github.com/ringcaptcha/ringcaptcha-android/archive/master.zip"><i class="icon icon-download"></i> Download Android SDK now</a></p>
+
+      <br/>
+
+    	<h2>Launching an Onboarding widget</h2>
+
+      <p>To use the one screen onboarding process bundled into the SDK with the option of onboarding automatically from a website PIN, all you need to do is call the <b>RingcaptchaApplication.onboard</b> method as described below from any user action like starting the app for the first time when is not logged-in.</p>
+
+      <br/>
+
+      <div class="text-center">
+        <img src="/assets/images/docs/android-onboard-sms.png" alt="Simple widget" width="216px" height="384px">
+        <img src="/assets/images/docs/android-onboard-pin.png" alt="Simple widget" width="216px" height="384px">
+        <img src="/assets/images/docs/android-onboarded.png" alt="Simple widget" width="216px" height="384px">
+      </div>
+
+        <br/>
+
+    <p>On your initial Activity, in the method hooked to the user event add the following line of code.</p>
+
+    <div class="highlight copyable">
+    <pre class="code"><code style="java">RingcaptchaApplication.onboard(getApplicationContext(),&quot;fe8i7agubujuqe2a6eta&quot;, &quot;3e1i6y9i6atuby1ifa1o&quot;, new RingcaptchaHandler() {
+      @Override
+      public void onSuccess(RingcaptchaVerification o) {
+          //Verification successful
+      }
+      @Override
+      public void onCancel(RingcaptchaVerification o) {
+          //Decide what do do if user cancelled operation
+      }
+  });</code></pre></div>
+
+    <p>In the event the widget does not find an open session or is unable to attribute the onboarding process to a user, it will automatically start the verification process by asking the phone number to the user to send the PIN code to.</p>
+
+    <br/>
+
+    <h2>Launching a Verification widget</h2>
+
+    <p>To use the two screen verification process bundled into the SDK, all you need to do is call the <b>RingcaptchaApplication.verifyPhoneNumber</b> method as described below from any user action like tapping a button for <b>Verify your Phone Number</b>.</p>
+
+      <br/>
+
+      <div class="text-center">
+        <img src="/assets/images/docs/android-phone.png" alt="Simple widget" width="216px" height="384px">
+        <img src="/assets/images/docs/android-pin.png" alt="Simple widget" width="216px" height="384px">
+        <img src="/assets/images/docs/android-verified.png" alt="Simple widget" width="216px" height="384px">
+      </div>
+
+      <br/>
+
+      <p>On your Activity, in the method hooked to the user event add the following line of code.</p>
+
+      <div class="highlight copyable">
+    	<pre class="code"><code style="java">RingcaptchaApplication.verifyPhoneNumber(getApplicationContext(),&quot;egadelycufyzudegy1a8&quot;, &quot;i4o7usy7o5afo4y9asos&quot;, new RingcaptchaHandler() {
+    @Override
+    public void onSuccess(RingcaptchaVerification o) {
+        //Verification successful
+    }
+    @Override
+    public void onCancel(RingcaptchaVerification o) {
+        //Decide what do do if user cancelled operation
+    }
+});</code></pre></div>
+
+    <br/>
+
+    <h2>Implementing SMS Deep-Linking</h2>
+
+    <p>Every SMS link sent by RingCaptcha will deep-link the user to either the application store for onboarding or the installed application for verification. Ringcaptcha link will redirect to the configured scheme and host for the app whenever a user opens the SMS link in their browser. In order to implement the custom sceheme in your app to populate automatically the PIN code, you will need to create a new intent-filter in your activity to match the following URL:</p>
+
+    <pre class="code"><code style="java">scheme://ringcaptcha/verified?token={TOKEN}&amp;pin={PIN_CODE}</code></pre>
+
+    <p>Then just add the following intent-filter in your AndroidManifest.xml file for the activity that will be managing the deep-linking:</p>
+
+    <div class="highlight copyable">
+      <pre class="code"><code style="java">&lt;intent-filter&gt;
+    &lt;action android:name="android.intent.action.VIEW" /&gt;
+    &lt;category android:name="android.intent.category.DEFAULT" /&gt;
+    &lt;category android:name="android.intent.category.BROWSABLE" /&gt;
+    &lt;data
+        android:scheme="yourAppScheme"
+        android:host="ringcaptcha" /&gt;
+&lt;/intent-filter&gt;
+        </code></pre>
+    </div>
+
+    <p>Lastly, in the Activity you've configured the intent-filter, include in the <b>onCreate</b> method code to handle the custom scheme like the below:</p>
+
+    <div class="highlight copyable">
+      <pre class="code"><code style="java">Uri data = getIntent().getData();
+if(data != null && data.getQueryParameter("pin") != null) {
+    String pin = data.getQueryParameter("pin");
+
+    RingcaptchaApplication.onboard(getApplicationContext(), &quot;fe8i7agubujuqe2a6eta&quot;, &quot;3e1i6y9i6atuby1ifa1o&quot;, pin, new RingcaptchaApplicationHandler() {
+
+        @Override
+        public void onSuccess(RingcaptchaVerification ringObj) {
+            Log.i(TAG, "success");
+        }
+
+        @Override
+        public void onCancel() {
+            Log.i(TAG, "cancel");
+        }
+    });
+}</code></pre>
+    </div>
+
+    <br/>
+
+  	<h2>Implementing your own UI</h2>
+
+    <br/>
+
+    <p>Should you be interested on using your own UI and calling the backend of RingCaptcha, you can do so by calling the API methods as described below.</p>
+
+    <p>First, Create Ringcaptcha controller using your app key</p>
+
+  	<pre class="code"><code>RingcaptchaAPIController controller = new RingcaptchaAPIController(&quot;ke8aqi8inota7y7uqibi&quot;);</code></pre>
+
+    <p>Send an initial SMS pin code</p>
+
+    <div class="highlight copyable">
+    <pre class="code"><code>controller.sendCaptchaCodeToNumber(context, phone, RingcaptchaService.SMS,new RingcaptchaAPIHandler() {
+
+  //Called when the response is successfull
+  @Override
+  public void onSuccess(RingcaptchaResponse o) {
+
+    //Handle SMS reception automatically (only valid for verification)
+    RingcaptchaAPIController.setSMSHandler(new RingcaptchaSMSHandler() {
+
+      //Only called when SMS reception was detected
+      @Override
+      public boolean handleMessage(String pin) {
+        //Automatically verify PIN code
+        return true;
+      }
+    });
+  }
+  //Called when the response is unsuccessfull
+  @Override
+  public void onError(Exception e) {
+    //Display an error to the user
+  }
+}, &quot;fa7213306a57328d258edd90fa9a1d88e38e261e&quot;);</code></pre></div>
+
+    <p>Send the pin code via a VOICE call. Ideal for retry attempts or landline phones</p>
+
+    <div class="highlight copyable">
+    <pre class="code"><code>controller.sendCaptchaCodeToNumber(context, phone, RingcaptchaService.VOICE, new RingcaptchaAPIHandler() {
+
+  //Called when the response is successfull
+  @Override
+  public void onSuccess(RingcaptchaResponse o) {
+    //Clear SMS handler to avoid multiple verification attempts
+    RingcaptchaAPIController.setSMSHandler(null);
+  }
+
+  //Called when the response is unsuccessfull
+  @Override
+  public void onError(Exception e) {
+    //Display an error to the user
+  }
+}, &quot;fa7213306a57328d258edd90fa9a1d88e38e261e&quot;);</code></pre></div>
+
+    <p>To Verify the PIN code entered by the user</p>
+
+    <div class="highlight copyable">
+    <pre class="code"><code>controller.verifyCaptchaWithCode(context, pin, new RingcaptchaHandler() {
+
+  //Called when the response is successfull
+  @Override
+  public void onSuccess(RingcaptchaResponse o) {
+    //Clear SMS handler to avoid multiple verification attempts
+    RingcaptchaAPIController.setSMSHandler(null);
+  }
+
+  //Called when the response is unsuccessfull
+  @Override
+  public void onError(Exception e) {
+    //Display an error to the user
+  }
+},&quot;fa7213306a57328d258edd90fa9a1d88e38e261e&quot;);</code></pre></div>
+
+    <p>Lookup an existing session for this device for automatic onboarding. The status of the session will be NEW if the service could not find an open session for this device, otherwise it will be SUCCESS in which case will return a list of phone numbers that match with this device.</p>
+
+    <div class="highlight copyable">
+    <pre class="code"><code>controller.onboard(context, new RingcaptchaHandler() {
+
+  //Called when the response is successfull
+  @Override
+  public void onSuccess(RingcaptchaResponse o) {
+    //Handle NEW or EXISTING sessions
+  }
+
+  //Called when the response is unsuccessfull
+  @Override
+  public void onError(Exception e) {
+    //Display an error to the user
+  }
+},&quot;{API KEY}&quot;);</code></pre></div>
+
+</div>
+</article>
+					<aside class="col-sm-3 secundary-menu">
+						<div class="secundary-inside">
+							<h3><a href="/docs">Overview</a></h3>
+							<p></p>
+							<div class="panel-group" id="accordion">
+								<div class="panel">
+									<div class="panel-heading">
+										<h4>
+											<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#web">HTML & JS</a>
+										</h4>
+									</div>
+									<div id="web" class="panel-collapse collapse">
+										<ul class="panel-body">
+											<li><a href="/docs/web">Installing the HTML &amp; JS Widget</a></li>
+											<li><a href="/docs/web">Launching an Onboarding widget</a></li>
+											<li><a href="/docs/web">Launching a Verification widget</a></li>
+											<li><a href="/docs/web">Customizing the HTML &amp; JS Widget</a></li>
+											<li><a href="/docs/web">Verifying the PIN code</a></li>
+										</ul>
+									</div>
+								</div>
+							 	<div class="panel">
+									<div class="panel-heading">
+										<h4>
+											<a data-toggle="collapse" data-parent="#accordion" href="#android">Android</a>
+										</h4>
+									</div>
+									<div id="android" class="panel-collapse collapse in">
+										<ul class="panel-body">
+											<li><a href="/docs/android">Installing the Android SDK</a></li>
+											<li><a href="/docs/android">Launching an Onboarding widget</a></li>
+											<li><a href="/docs/android">Launching a Verification widget</a></li>
+											<li><a href="/docs/android">Implementing your own UI</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="panel">
+									<div class="panel-heading">
+										<h4>
+											<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#ios">iOS</a>
+										</h4>
+									</div>
+									<div id="ios" class="panel-collapse collapse">
+										<ul class="panel-body">
+											<li><a href="/docs/ios">Installing the iOS SDK</a></li>
+											<li><a href="/docs/ios">Launching an Onboarding widget</a></li>
+											<li><a href="/docs/ios">Launching a Verification widget</a></li>
+											<li><a href="/docs/ios">Implementing your own UI</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="panel">
+									<div class="panel-heading">
+										<h4>
+											<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#api">Rest API</a>
+										</h4>
+									</div>
+									<div id="api" class="panel-collapse collapse">
+										<ul class="panel-body">
+											<li>
+												<a href="/docs/api">Phone Verification</a>
+											</li>
+											<li><a href="/docs/api">SMS Gateway</a></li>
+											<li><a href="/docs/api">Phone Number Information</a></li>
+											<li><a href="/docs/api">Metrics</a></li>
+											<li><a href="/docs/api">Apps</a></li>
+											<li><a href="/docs/api">Error Codes</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="panel">
+									<div class="panel-heading">
+										<h4>
+											<a class="expanded" target="_blank" href="//groups.google.com/forum/#!forum/ringcaptcha">FAQ &amp; Forum</a>
+										</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+					</aside>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+  </section>
+  <footer role="contentinfo" id="footer">
+    <div class="container-fluid">
+      <div class="row" style="font-size: 12px;">
+        <div class="col-sm-6">
+          <p>Copyright &copy; RingCaptcha 2016. All Rights Reserved.</p>
+        </div>
+        <div class="col-sm-6">
+          <div class="pull-right footer-menu">
+            <a href="javascript:void();" class="js-privacy-popup">Privacy Policy</a>
+            <a href="javascript:void();" class="js-terms-popup">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,15 @@
+<section class="login-container" role="main">
+<div class="login-form">
+   <h1>Reset</h1>
+           <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :role => 'form'}) do |f| %>
+   <div class="form-group">
+       <%= f.email_field :email, :autofocus => true, class: 'form-control', placeholder: 'Your email address' %>
+   </div>
+   <div class="form-group">
+        <%= f.submit 'Reset Password', :class => 'btn btn-default btn-block' %>
+   </div>
+    <p>Already have an account? <a href="/">Log In</a></p>
+
+   <% end %>
+</div>
+</section>

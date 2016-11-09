@@ -1,0 +1,2 @@
+class RingSession < ApplicationRecord
+end

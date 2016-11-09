@@ -1,0 +1,2 @@
+class EnabledCountry < ApplicationRecord
+end

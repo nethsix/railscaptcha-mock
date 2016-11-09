@@ -1,0 +1,107 @@
+<div id="pjax-modal-container" class="modal-content">
+
+<div class="modal-app">
+  <form name="edit_app" method="post" action='/apps/edit/<%=@user_site.id %>' data-pjax="1">
+    <div class="modal-app-body">
+      <div class="modal-app-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h3>Edit App</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="control-label required" for="edit_app_appType">App type</label>
+            <select id="edit_app_appType" name="edit_app[appType]" required="required" class="form-control">
+              <option value="">Choose One</option>
+              <option value="WEBSITE">Web</option>
+              <option value="MOBILE" selected="selected">Mobile</option>
+              <option value="ONBOARDING">Onboarding</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label required" for="edit_app_appName">App name</label>
+            <input type="text" id="edit_app_appName" name="edit_app[appName]" required="required" class="form-control" value="<%=@user_site.app_name %>">
+          </div>
+          <div class="form-group" style="margin-bottom: 0;">
+            <label style="font-weight: bold;">App Information</label>
+            <div class="row"><div class="col-md-6">
+              <div class="form-group">
+                <label>
+                  <label class="control-label" for="edit_app_appSchemes_ios">iOS Scheme</label>&nbsp;
+            <span class="circle-btn circle-help" data-toggle="tooltip" data-placement="top" title="Custom Scheme to use for the SMS link to deep-link to your app for verification. Do not include : or //"><i class="fa fa-question"></i></span>
+          </label>
+          <input type="text" id="edit_app_appSchemes_ios" name="edit_app[appSchemes][ios]" value="<%=@ios_scheme %>" class="form-control">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label><label class="control-label" for="edit_app_appSchemes_android">Android Scheme</label>&nbsp;
+            <span class="circle-btn circle-help" data-toggle="tooltip" data-placement="top" title="Custom Scheme to use for the SMS link to deep-link to your app for verification. Do not include : or //">
+              <i class="fa fa-question"></i>
+            </span>
+          </label>
+          <input type="text" id="edit_app_appSchemes_android" name="edit_app[appSchemes][android]" value="<%=@android_scheme %>" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" style="margin-bottom: 0;">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>
+            <label class="control-label" for="edit_app_storeIds_ios">iOS App ID</label>&nbsp;
+            <span class="circle-btn circle-help" data-toggle="tooltip" data-placement="top" title="iTunes Store app id for the SMS link to deep-link directly to that app.">
+              <i class="fa fa-question"></i>
+            </span>
+            </label>
+            <input type="text" id="edit_app_storeIds_ios" name="edit_app[storeIds][ios]" value="<%=@ios_id %>" class="form-control">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label><label class="control-label" for="edit_app_storeIds_android">Android Package</label>&nbsp;
+            <span class="circle-btn circle-help" data-toggle="tooltip" data-placement="top" title="Play Store package name for the SMS link to deep-link directly to that app."><i class="fa fa-question"></i></span></label>
+            <input type="text" id="edit_app_storeIds_android" name="edit_app[storeIds][android]" value="<%=@android_id %>" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" style="margin-bottom: 0;">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>
+              <label class="control-label" for="edit_app_unavailablePlatformFallbackUrl">Other Platforms</label>&nbsp;
+            <span class="circle-btn circle-help" data-toggle="tooltip" data-placement="top" title="URL to redirect to whenever the SMS link is accessed from a different platform.">
+              <i class="fa fa-question"></i>
+            </span>
+          </label>
+          <input type="text" id="edit_app_unavailablePlatformFallbackUrl" name="edit_app[unavailablePlatformFallbackUrl]" value="<%=@user_site.unavailable_platform_fallback_url || ''%>" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="form-group"><label>App Key</label><input type="text" class="form-control" value="<%=@user_site.site_key || '' %>" readonly="">
+  </div>
+  <div class="form-group"><label>Secret Key</label><input type="text" class="form-control" value="<%=@user_site.private_key || ''%>" readonly="">
+  </div>
+</div>
+</div>
+</div>
+<div class="modal-app-footer">
+  <a href="/apps/3942/delete?token=X4I6GBvq__aCgTOOkkbjv55FfdR4wQPZCmGNT8hXzBw" class="btnmodal js-delete-app">
+  <i class="icon icon-remove"></i> Remove App</a>
+  <button type="submit" class="btnmodal"><i class="icon icon-save"></i> Save changes</button>
+</div>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+</form>
+</div>
+<script>
+$('input#edit_app_domain').tagsinput();
+$('.bootstrap-tagsinput input').keyup(function () {
+    $(this).attr('size', $(this).val().length).css('width', 'auto');
+});
+</script></div>

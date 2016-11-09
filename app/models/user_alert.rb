@@ -1,0 +1,2 @@
+class UserAlert < ApplicationRecord
+end

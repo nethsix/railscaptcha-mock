@@ -1,0 +1,144 @@
+<div class="wrap">
+  <section id="main-container" role="main" style="min-height: 522px;">
+    <div ng-controller="MetricsCtrl">
+    <header class="title-container">
+        <div class="title clearfix">
+            <div class="col-sm-3">
+                <h1>Dashboard</h1>
+            </div>
+            <div class="col-sm-9 dash-datebox">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info" ng-model="type" btn-radio="'verification'">verifications</button>
+                    <% if (current_user.user_profile.service_plan_id.nil? || current_user.user_profile.service_plan_id != 47) %>
+                    <button type="button" class="btn btn-info" ng-model="type" btn-radio="'gateway'">gateway</button>
+                    <% end%>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info" ng-model="interval" btn-radio="'3-hour'">3h</button>
+                    <button type="button" class="btn btn-info" ng-model="interval" btn-radio="'6-hour'">6h</button>
+                    <button type="button" class="btn btn-info" ng-model="interval" btn-radio="'12-hour'">12h</button>
+                    <button type="button" class="btn btn-info" ng-model="interval" btn-radio="'1-day'">1d</button>
+                    <button type="button" class="btn btn-info" ng-model="interval" btn-radio="'3-day'">3d</button>
+                    <button type="button" class="btn btn-info" ng-model="interval" btn-radio="'7-day'">7d</button>
+                    <button type="button" class="btn btn-info" ng-model="interval" btn-radio="'1-month'">1m</button>
+                    <date-range-picker id="datepicker2" ng-model="range" ranged="true" class="btn"></date-range-picker>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid dash">
+        <div class="row">
+            <div class="col-sm-12 dash-filter">
+                <form>
+                    <select data-placeholder="All Apps" chosen style="width:300px;" ng-model="app">
+                        <option value="" selected>All Apps</option>
+                        <optgroup label="My Apps">
+                          <% for app in @my_apps %>
+                          <option value='{"site_key":"<%=app.site_key %>", "secret_key":"<%=app.private_key %>" }'><%=app.domain||app.app_name %></option>
+                          <% end %>
+                        </optgroup>
+                        <optgroup label="Other Apps">
+                        </optgroup>
+                    </select>
+                    <a href="/apps" class="btn btn-default" ng-show="app" ng-hide="app.site_key">Create New App</a>
+                    <a href="/apps" class="btn btn-default" ng-show="app.site_key">Edit</a>
+                </form>
+                <p ng-show="app.site_key">
+                    <span>Key:</span> <strong>{{app.site_key}}</strong>
+                    <span>Secret Key:</span>
+                    <strong ng-click="showPrivateKey = !showPrivateKey" style="cursor:pointer">
+                        <span ng-hide="showPrivateKey">xxxxxxxxxxxxxxxxxxxx</span>
+                        <span ng-show="showPrivateKey">{{app.secret_key}}</span>
+                    </strong>
+
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div id="rate" ng-class="type == 'gateway' || <%=(current_user.user_profile.service_plan_id == 47) %> ? 'col-md-4' : 'col-md-3'">
+                <div class="dash-data" style="padding: 44.5px 0;">
+                    <p>{{kpis.rate.pretty}}</p>
+                    <small>success rate</small>
+                </div>
+            </div>
+            <% if (current_user.user_profile.service_plan_id.nil? || current_user.user_profile.service_plan_id != 47) %>
+            <div id="spend" ng-class="type == 'gateway' || <%=(current_user.user_profile.service_plan_id == 47) %> ? 'col-md-4' : 'col-md-3'">
+                <div class="dash-data" style="padding: 44.5px 0;">
+                    <p>{{kpis.spend.pretty}}</p>
+                    <small>total spend</small>
+                </div>
+            </div>
+            <% end %>
+            <div id="latency" ng-class="type == 'gateway' || <%=(current_user.user_profile.service_plan_id == 47) %> ? 'col-md-4' : 'col-md-3'" ng-hide="type == 'gateway'">
+                <div class="dash-data" style="padding: 44.5px 0;">
+                    <p>{{kpis.latency.pretty}}</p>
+                    <small>latency</small>
+                </div>
+            </div>
+            <div id="transactions" ng-class="type == 'gateway' || <%=(current_user.user_profile.service_plan_id == 47) %> ? 'col-md-4' : 'col-md-3'">
+                <div class="dash-data" style="padding: 44.5px 0;">
+                    <p>{{kpis.transactions.pretty}}</p>
+                    <small>transactions</small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="dash-graph">
+                    <div class="graph">
+                        <div id="chart" style="height:250px"></div>
+                        <div id="tooltip"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="dash-graph">
+                    <div class="graph unbordered">
+                        <div id="choropleth"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="overflow: hidden;">
+            <a ng-href="/download?from={{from.format()|uriComponentEncode}}&to={{to.format()|uriComponentEncode}}&apps={{app.site_key}}" class="btn btn-default pull-left" style="position:relative"><i class="icon icon-download"></i> Download Transactions</a>
+            <span style="line-height: 39px; padding-left: 5px; font-size: 11px;">(limited to 10k transactions)</span>
+        </div>
+    </div>
+    <script type="text/template" id="choropleth-popup">
+        <div class="chartTooltip arrows-up">
+          <h6><%%= geo.properties.name %></h6>
+          <%% if (data) { %>
+              <small>Success Rate: <%%= numeral(data.rate / 100).format('0%') %></small>
+              <% if (current_user.user_profile.service_plan_id.nil? || current_user.user_profile.service_plan_id != 47) %>
+                  <small>Total Spend: <%%= numeral(data.spend).format('$0,0.00') %></small>
+              <% end %>
+              <%% if (data.latency) { %>
+                  <small>Latency: <%%= numeral(data.latency).format('00:00:00') %></small>
+              <%% } %>
+              <small>Transactions: <%%= numeral(data.transactions).format('0,0') %></small>
+          <%% } %>
+        </div>
+    </script>
+    <script type="text/template" id="chart-popup">
+        <div class="chartTooltip arrows-down">
+            <h6></h6>
+        </div>
+    </script>
+</div>
+  </section>
+  <footer role="contentinfo" id="footer">
+    <div class="container-fluid">
+      <div class="row" style="font-size: 12px;">
+        <div class="col-sm-6">
+          <p>Copyright &copy; RingCaptcha 2016. All Rights Reserved.</p>
+        </div>
+        <div class="col-sm-6">
+          <div class="pull-right footer-menu">
+            <a href="javascript:void();" class="js-privacy-popup">Privacy Policy</a>
+            <a href="javascript:void();" class="js-terms-popup">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

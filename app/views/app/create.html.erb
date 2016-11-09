@@ -1,0 +1,50 @@
+<div id="pjax-modal-container" class="modal-content">
+
+<div class="modal-app">
+  <form name="create_app" method="post" action="/apps/create" data-pjax="#pjax-modal-container">
+    <div class="modal-app-body">
+      <div class="modal-app-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
+        </button>
+        <h3>Create App</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label required" for="create_app_appType">App type</label>
+                <select id="create_app_appType" name="create_app[appType]" required="required" class="form-control">
+                  <option value="" selected="selected">Choose One</option>
+                  <option value="WEBSITE">Web</option>
+                  <option value="MOBILE">Mobile</option>
+                  <option value="ONBOARDING">Onboarding</option>
+                </select>
+              </div>
+              <p>Use WEB if you will be integrating it only for verification on your website.</p>
+              <p>Use MOBILE if you will be integrating the app in your mobile app.</p>
+              <p>Use ONBOARDING if you will want the app to work for verification in a WEBSITE or MOBILE app as well as onboarding from your landing.</p>
+            </div>
+            <div class="col-md-6">
+              <ul class="steps">
+                <li><span>1</span><h4>Step 1</h4><div><p>Select an App Type.</p></div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-app-footer">
+      <p class="pull-left">Fill all fields and then follow the instructions to integrate</p>
+      <button type="submit" class="btnmodal btnmodal-red"><i class="icon icon-create"></i> Create App</button>
+    </div>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+</form>
+  </div>
+  <script>
+  $('input#create_app_domain').tagsinput();
+  $('.bootstrap-tagsinput input').keyup(function () {
+      $(this).attr('size', $(this).val().length).css('width', 'auto');
+  });
+  </script>
+</div>

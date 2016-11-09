@@ -1,0 +1,2 @@
+class ProviderPhoneNumber < ApplicationRecord
+end

@@ -1,0 +1,169 @@
+<div class="wrap">
+  <section id="main-container" role="main" style="min-height: 522px;">
+    <div id="js-app-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="overlay hide">
+        <div class="spinner"></div>
+    </div>
+    <div id="pjax-modal-container" class="modal-content"></div>
+  </div>
+</div>
+<header class="title-container">
+    <div class="title title-active">
+        <div class="col-md-12">
+            <h1>User Profile</h1>
+        </div>
+    </div>
+    <div class="subtitle">
+        <div class="col-md-12">
+            <p>Update your profile</p>
+        </div>
+    </div>
+</header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+                    </div>
+        <div class="col-xs-12">
+
+              <%= form_for current_user, :method => :post, :url => {:action => 'update'} do |f| %>
+                <%= render 'layouts/messages' %>
+                <fieldset class="wrapper">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                        </div>
+                        <div class="col-sm-5">
+                            <h3>Personal information</h3>
+                            <div class="form-group">
+                        <label class="control-label required" for="first_name">
+                          First name
+                        </label>
+                        <input type="text" id="first_name" name="current_user[first_name]" required="required" class="form-control" value="<%=current_user.first_name%>" />
+
+    </div>
+                        <div class="form-group">
+                          <label class="control-label required" for="last_name">
+                            Last name
+                          </label>
+                          <input type="text" id="last_name" name="current_user[last_name]" required="required" value="<%=current_user.last_name%>" class="form-control" />
+                        </div>
+
+                      <div class="form-group">
+                        <label class="control-label" for="phone">
+                          Phone
+                        </label>
+                        <input type="text" id="phone" name="current_user[phone]" maxlength="100" value="<%=current_user.phone%>" class="form-control" />
+                      </div>
+
+                            <h3>Account information</h3>
+                            <div class="form-group">
+                                <label class="control-label">E-mail</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="<%=current_user.email%>" readonly>
+                                    <span class="input-group-btn">
+                                        <a href="/account/change-email" class="btn btn-default">Edit</a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Password</label>
+                                <p>
+                                    <a href="/account/change-password" class="btn btn-default" role="button">Change Password</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 col-sm-offset-2">
+                            <h3>Billing information</h3>
+
+                    <div class="form-group">
+                      <label class="control-label">Credit Card</label>
+                      <p class="form-control-static" style="line-height: 31px;">
+                        <!--TODO-->
+                          You don't have any credit card associated
+                          <a href="/account/change-credit-card" class="btn btn-default btn-sm pull-right" role="button">Update</a>
+                      </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="edit_profile_profile_attn_name">Attn name</label>
+                        <input type="text" id="attn_name" name="current_user[attn_name]" value="<%=current_user.attn_name%>" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="edit_profile_profile_company_name">Company name</label>
+                        <input type="text" id="company_name" name="current_user[company_name]" value="<%=current_user.company_name%>" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="edit_profile_profile_company_address">
+                          Company address
+                        </label>
+                        <input type="text" id="company_address" name="current_user[company_address]" value="<%=current_user.company_address%>" class="form-control" />
+                    </div>
+
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label>
+                      <% if current_user.has_auto_reload == true %>
+                       <%= check_box 'current_user', 'has_auto_reload', {:checked => true}, checked_value = "1", unchecked_value = "0" %>
+                      <% else %>
+                       <%= check_box 'current_user', 'has_auto_reload', {:checked => false}, checked_value = "1", unchecked_value = "0" %>
+                      <% end %>
+
+                      Enable auto-reload each time my balance drops below a threshold
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                        <label class="control-label" for="edit_profile_profile_autoreload_amount">
+                          Autoreload amount
+                        </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">$ </span>
+                        <input type="text" id="auto_reload_amount" name="current_user[auto_reload_amount]" class="form-control" value="<%=current_user.auto_reload_amount || 20.00%>" />
+                    </div>
+                  </div>
+                            <div class="form-group">
+                        <label class="control-label" for="edit_profile_profile_autoreload_trigger_amount">Threshold amount</label>
+                <div class="input-group">
+                            <span class="input-group-addon">$ </span>
+        <input type="text" id="auto_reload_trigger_amount" name="current_user[auto_reload_trigger_amount]" class="form-control" value="<%=current_user.auto_reload_trigger_amount || 10.00%>" />    </div>
+
+    </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <footer class="form-footer">
+                    <div>
+                        <button type="submit" class="btn btn-default">Update profile</button>
+                    </div>
+                </footer>
+            <!--<input type="hidden" id="edit_profile_authenticity_token" name="edit_profile[authenticity_token]" class="form-control" value="VcS2sYd-trgJGdNr3ZbNOFGCSOwwhy4Tpx88Ji4Uoyk" />-->
+          <% end %>
+
+        </div>
+        <div class="col-xs-12" style="margin-top: 20px;">
+                        <div class="alert alert-info no-fade" role="alert">You don't have any guest user associated to your account.</div>
+                        <a href="/guests/invite" class="btn btn-default" data-pjax-modal><i class="icon icon-create"></i> Add user</a>
+        </div>
+    </div>
+</div>
+  </section>
+  <footer role="contentinfo" id="footer">
+    <div class="container-fluid">
+      <div class="row" style="font-size: 12px;">
+        <div class="col-sm-6">
+          <p>Copyright &copy; RingCaptcha 2016. All Rights Reserved.</p>
+        </div>
+        <div class="col-sm-6">
+          <div class="pull-right footer-menu">
+            <a href="javascript:void();" class="js-privacy-popup">Privacy Policy</a>
+            <a href="javascript:void();" class="js-terms-popup">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

@@ -1,0 +1,2 @@
+class UserFeature < ApplicationRecord
+end

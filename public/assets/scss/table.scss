@@ -1,0 +1,66 @@
+//
+// Table
+// --------------------------------------------------
+
+.table-container {
+	margin-bottom: 15px;
+	overflow: auto;
+	width: 100%;
+
+	h3,
+	.dark th {
+		background: $blueDark;
+		color: $white;
+		font-size: 1.2rem;
+		line-height: 27px;
+		min-height: 27px;
+		padding: 0 15px;
+		text-transform: uppercase;
+	}
+	h3 {
+		border-radius: $border-radius-large $border-radius-large 0 0;
+		margin: 0;
+	}
+	.dark tr:first-child {
+		th:first-child {
+			border-radius: $border-radius-large 0 0 0;
+		}
+		th:last-child {
+			border-radius: 0 $border-radius-large 0 0;
+		}
+	}
+
+	// td, th {
+	// 	padding: 5px;
+	// }
+	td {
+		.code {
+			margin: 0;
+		}
+	}
+	.actions {
+		min-width: 90px;
+	}
+}
+.table-striped {
+	border-top: 1px solid $blueLighterBorder;
+	border-bottom: 1px solid $blueLighterBorder;
+	td, 
+	th {
+		border-left: 1px solid $blueLighterBorder;
+		border-right: 1px solid $blueLighterBorder;
+		vertical-align: middle !important;
+	}
+	.dark th {
+		border-left-color: $grayDarker;
+		border-right-color: $grayDarker;
+	}
+
+	&.unbordered {
+		border-bottom: none;
+		td, th {
+			border-left: none;
+			border-right: none;
+		}
+	}
+}

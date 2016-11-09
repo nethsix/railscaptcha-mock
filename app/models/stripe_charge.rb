@@ -1,0 +1,2 @@
+class StripeCharge < ApplicationRecord
+end

@@ -1,0 +1,444 @@
+!!!
+%html{"ng-app" => "panel"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "UTF-8"}/
+    %meta{:content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width", :name => "viewport"}/
+    %title Dashboard
+    %link{:href => "/favicon.ico", :rel => "shortcut icon"}/
+    %link{:href => "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    %link{:href => "/assets/css/app.css", :rel => "stylesheet"}/
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .overflow
+      #spinner
+    %a#topf
+    .blacktile{:style => "display:none"}
+      .privacypolicy.foo
+        .popup
+          %a.close.js-close{:href => "#"} +
+          %h2.h2-popup Privacy Policy
+          %p.paragraph4.margin-bottom Last Updated: 2015-01-15
+          %p.paragraph4.margin-bottom This privacy policy (“Policy”) explains how your personal information is collected, used, and disclosed by ThriveCom, Inc. and its subsidiaries and affiliated companies (“RingCaptcha,” “we,” or “us”). This Policy applies to end users of our widget and online services (“Services”). This Policy does not apply to websites, applications, or services that do not display or link to this statement or that display or link to different privacy statements.
+          %h3.popups INFORMATION COLLECTED
+          %br/
+          %h4.popups Information You Provide To Us
+          %br/
+          %p.paragraph4.margin-bottom When you upload a phone number to our Service, we will send an SMS message or place a phone call to the phone number to verify whether the number is a live number, and that it belongs to you.  We will also store those phone numbers you upload to the Service in a hashed or encrypted manner for fraud and service abuse prevention, debugging purposes.
+          %h4.popups Information Collected Via Technology
+          %br/
+          %p.paragraph4.margin-bottom
+            When you use our Service, some information is automatically collected.   We collect the following information for fraud and service abuse prevention, debugging  purposes and to identify bots and other automatic scripts that may be attempting to gain access to our systems:
+            = succeed "\u{2022}" do
+              %br/
+            = succeed "\u{2022}" do
+              %br/
+            = succeed "\u{2022}" do
+              %br/
+          %h3.popups USE OF INFORMATION WE COLLECT
+          %br/
+          %p.paragraph4.margin-bottom
+            We use personal information collected through our Sites for purposes described in this Policy or disclosed to you on our Sites or in connection with our services. For example, we may use your information to:
+            = succeed "\u{2022}" do
+              %br/
+            = succeed "\u{2022}" do
+              %br/
+            = succeed "\u{2022}" do
+              %br/
+            = succeed "\u{2022}" do
+              %br/
+          %p.paragraph4.margin-bottom We may create anonymized data records from personal information by excluding information (such as your name) that makes the data personally identifiable to you. We use this anonymized data to analyze request and usage patterns so that we may enhance the content of our products and services and improve user experience. We reserve the right to use anonymized data for any purpose and to disclose anonymized data to third parties in our sole discretion.
+          %h3.popups SHARING OF PERSONAL INFORMATION
+          %br/
+          %h4.popups Information We Share
+          %br/
+          %p.paragraph4.margin-bottom
+            We disclose your personal information as described below and as described elsewhere in this Policy:
+            = succeed "\u{2022}" do
+              %br/
+            = succeed "\u{2022}" do
+              %br/
+            = succeed "\u{2022}" do
+              %br/
+            = succeed "\u{2022}" do
+              %br/
+          %h3.popups A NOTE TO USERS OUTSIDE OF THE UNITED STATES
+          %br/
+          %p.paragraph4.margin-bottom If you are a non-U.S. user of the Site, by visiting the Site and providing us with data, you acknowledge and agree that your personal information may be processed for the purposes identified in the Policy. In addition, your personal information may be processed in the country in which it was collected and in other countries, including the United States, where laws regarding processing of personal information may be less stringent than the laws in your country. By providing your data, you consent to such transfer.
+          %h3.popups SECURITY OF YOUR PERSONAL INFORMATION
+          %br/
+          %p.paragraph4.margin-bottom RingCaptcha is committed to protecting the security of your personal information. We use a variety of industry-standard security technologies and procedures to help protect your personal information from unauthorized access, use, or disclosure. No method of transmission over the Internet, or method of electronic storage, is 100% secure, however. Therefore, while RingCaptcha uses reasonable efforts to protect your personal information, RingCaptcha cannot guarantee its absolute security.
+          %h3.popups CHANGES TO THIS POLICY
+          %br/
+          %p.paragraph4.margin-bottom This Policy is subject to occasional revision, and if we make any material changes in the way we use your personal information, we will notify you by posting notice of the changes on our Site. Any changes to this Policy will be effective upon the earlier of thirty (30) calendar days following our posting of notice of the changes on our Site. These changes will be effective immediately for new users of our widget and/or Service. Continued use of our widget or Service following notice of such changes shall indicate your acknowledgement of such changes.
+          %h3.popups QUESTIONS
+          %br/
+          %p.paragraph4.margin-bottom If you have any questions about this Policy, please contact us at hello@ringcaptcha.com.
+    .blacktile{:style => "display:none"}
+      .termsofservice.foo
+        .popup
+          %a.close.js-close{:href => "#"} +
+          %h2.h2-popup Terms of Service
+          %p.paragraph4.margin-bottom Last Updated: 2015-01-15
+          %p.paragraph4.margin-bottom PLEASE READ THIS TERMS OF USE AGREEMENT (“AGREEMENT”) CAREFULLY.  BY CLICKING THE “ACCEPT” BUTTON OR ACCESSING, DOWNLOADING OR USING THE THRIVECOM, INC. (“RINGCAPTCHA” OR “WE”) WIDGET OR API, INCLUDING USING THE SERVICES AVAILABLE VIA THE WIDGET OR API, OR COMPLETING THE REGISTRATION PROCESS, YOU REPRESENT THAT (1) YOU HAVE READ AND AGREE TO BE BOUND BY THIS AGREEMENT, (2) YOU ARE OF LEGAL AGE TO FORM A BINDING CONTRACT WITH RINGCAPTCHA, AND (3) YOU HAVE THE AUTHORITY TO ENTER INTO THIS AGREEMENT PERSONALLY OR ON BEHALF OF THE ENTITY YOU REPRESENT, AND TO BIND THAT ENTITY TO THIS AGREEMENT. THE TERM “YOU” REFERS TO THE INDIVIDUAL OR LEGAL ENTITY, AS APPLICABLE, IDENTIFIED AS THE USER WHEN YOU COMPLETED THE REGISTRATION PROCESS.  IF YOU DO NOT AGREE TO ALL OF THE TERMS OF THIS AGREEMENT, YOU MUST NOT ACCESS OR USE THE WIDGET OR API. RingCaptcha and you may be referred to individually as a “Party” and collectively as the “Parties”.
+          %p.paragraph4.margin-bottom PLEASE NOTE THAT THIS AGREEMENT IS SUBJECT TO CHANGE BY RINGCAPTCHA IN ITS SOLE DISCRETION AT ANY TIME.  When changes are made, RingCaptcha will make a new copy of this Agreement available at our website located at http://ringcaptcha.com/legal/terms (“Website”).  We will also update the “Last Updated” date at the top of this Agreement.  If we make any material changes, and you have registered with us to create an Account (as defined in Section 1.2 below) we will also send an email to you at the last email address you provided to us pursuant to this Agreement.  Any changes to this Agreement will be effective immediately for new users of the RingCaptcha Offerings (as defined below) and will be effective thirty (30) days after posting notice of such changes on the Website for existing users.  RingCaptcha may require you to provide consent to the updated Agreement in a specified manner for further use of the RingCaptcha Offerings is permitted.  If you do not agree to any change(s) after receiving a notice of such change(s), you shall stop using the RingCaptcha Offerings.  Otherwise, your continued use of the RingCaptcha Offerings constitutes your acceptance of such change(s).
+          %h3.popups 1. OVERVIEW
+          %br/
+          %p.paragraph4.margin-bottom 1.1 The Service. RingCaptcha’s service (“Service”) enables users to verify phone numbers via its application programming interfaces, with related tools and documentation (collectively, the “API”) that developers can use within software applications or websites (your “Application”), and a software tool that you may place on your website or mobile application (“Widget”, together with the API, the “RingCaptcha Offerings”)).
+          %p.paragraph4.margin-bottom 1.2 Accounts.
+          %p.paragraph4.margin-bottom (a) Free and Paid Accounts.  In order to use certain features of the Service, you must register for an account with RingCaptcha (an “Account”). We offer two types of Accounts: a free version (“Free Account”), and a paid account (“Paid Account”).  Users with Free Accounts shall be able to use the Services on a limited basis, as certain features of the Services may only be available to users with Paid Accounts.  However, RingCaptcha may, in its sole discretion charge fees in connection with certain services.
+          %p.paragraph4.margin-bottom (b) Registration Information.  In order to use certain features of the Service, you must register for an account with RingCaptcha (an “Account”). You represent and warrant that: (i) all required registration information you submit is truthful and accurate; and (ii) you will maintain the accuracy of such information. RingCaptcha may suspend or terminate your Account if you breach any of the terms of this Agreement. You are responsible for maintaining the confidentiality of your Account login information and are fully responsible for all activities that occur under your Account. You agree to immediately notify RingCaptcha of any unauthorized use, or suspected unauthorized use, of your Account, or any other breach of security. RingCaptcha will not be liable for any loss or damage arising from your failure to comply with the above requirements.
+          %h3.popups 2. LICENSED USES AND RESTRICTIONS
+          %br/
+          %p.paragraph4.margin-bottom 2.1 License Grant. Subject to your compliance with the terms and conditions of this Agreement, we grant you a limited, non-exclusive, non-assignable, non-transferable license to: (i) use and display the Widget on your website or mobile application (“Your Site”) for your internal business purposes; (ii) internally use and access the API solely as necessary to develop, maintain and support your Application in accordance with the documentation or specifications included in the API; and (iii) access and display your Application to the appropriate end users of your Application.
+          %p.paragraph4.margin-bottom 2.2 Restrictions. You agree that you will not, and will not assist, permit, authorize, or enable others to do any of the following restrictions (each, a “Restriction”) without our express written consent: (i) reverse engineer or decompile the RingCaptcha Offerings or any component thereof, or attempt to create a substitute or similar service through use of or access to the RingCaptcha Offerings, unless this is expressly permitted or required by applicable law; (ii) copy, rent, lease, sell, transfer, assign, sublicense, or alter any part of the RingCaptcha Offerings; (iii) use RingCaptcha’s name to endorse or promote any product, including a product derived from the RingCaptcha Offerings; (iv) remove any legal, copyright, trademark, or other proprietary rights notices contained in or on the RingCaptcha Offerings; (v) use the Service in a manner that, as determined by RingCaptcha, in our sole discretion, exceeds reasonable request volume, constitutes excessive or abusive usage, or otherwise fails to comply or is inconsistent with any part of the RingCaptcha Offerings documentation; (vi) use any robot, spider, site search/retrieval application, or other device to collect information about users for any unauthorized purpose; (vii) use the RingCaptcha Offerings to offer or promote, or otherwise use the RingCaptcha Offerings in association with, any products or services for sale; (viii) use the RingCaptcha Offerings in any manner that prevents the end users of Your Site from linked directly to the Services; or (ix) place the Widget on any website that includes content that is offensive, harassing, threatening, abusive, discriminatory, vulgar, pornographic, or otherwise inappropriate, as determined by RingCaptcha in its sole discretion. We reserve the right to modify this list of Restrictions upon notice to you.
+          %p.paragraph4.margin-bottom 2.3 End User Consents.  You understand and agree that in order to verify the phone numbers via the RingCaptcha Offerings, the Service will send SMS messages and/or place phone calls to the recipients of the phone numbers that are uploaded to the Service via the RingCaptcha Offerings.  You are solely responsible for providing all notices and obtaining all consents required under applicable law in connection with such SMS messages and phone calls, including the Controlling the Assault on Non-Solicited Pornography and Marketing Act of 2003, as amended (CAN-SPAM) and the Telephone Consumer Protection Act of 1991, as amended (TCPA).
+          %h3.popups 3. DEVELOPER APPLICATIONS
+          %br/
+          %p.paragraph4.margin-bottom 3.1 App Policy. You are solely responsible and liable for your Applications, and for supporting the Applications.  On each Application in which you use the RingCaptcha Offerings, you shall prominently display and comply with a privacy policy on such Application that includes a full, accurate and clear disclosure regarding RingCaptcha’s collection, use and distribution of personal information collected via the Service in accordance with our Privacy Policy, available at http://ringcaptcha.com/legal/policy.  You represent and warrant that your Application will not: (i) violate any third-party right, including any copyright, trademark, patent, trade secret, moral right, privacy right, right of publicity, or any other intellectual property or proprietary right; (ii) violate any laws or regulations (including any privacy laws) or any obligations or restrictions imposed by any third party; (iii) be harassing, abusive, tortious, threatening, harmful, invasive of another’s privacy, vulgar, defamatory, false, intentionally misleading, trade libelous, pornographic, obscene, or patently offensive, or promote racism, bigotry, hatred, or physical harm of any kind against any group or individual, or be otherwise objectionable; (iv) be harmful to minors in any way; (v) contain any computer viruses, worms, or any software intended to damage or alter a computer system or data; (vi) send unsolicited or unauthorized advertising, promotional materials, junk mail, spam, text messages, chain letters, pyramid schemes, or any other form of duplicative or unsolicited messages, whether commercial or otherwise; or (vii) offer or promote services that may be damaging to, disparaging of, or otherwise detrimental to RingCaptcha or its licensors, licensees, affiliates and partners.
+          %p.paragraph4.margin-bottom 3.2 Refusal of Applications. RingCaptcha will have the right, in its sole discretion, to refuse to permit your use of the RingCaptcha Offerings with a particular Application. Unless RingCaptcha states otherwise, such rejection will not terminate this Agreement with respect to any other Application. RingCaptcha will have no liability to you for such refusal.
+          %p.paragraph4.margin-bottom 3.3 Monitoring. You agree to provide us with access to your Application and other materials related to your use of the RingCaptcha Offerings as reasonably requested by us to verify your compliance with this Agreement. You agree that we may crawl or otherwise monitor online Applications and you agree not to block or interfere with such efforts by RingCaptcha. You hereby grant to us a paid-up, royalty-free, nonexclusive, worldwide, irrevocable right and license to: (i) use, perform and display your Application (to the extent you have provided us the means to do so); (ii) link to and direct users to your Application; and (iii) sublicense the foregoing rights to our affiliates or any third parties that are working with us as development partners, hosting facilities and in similar capacities in order to enable them to perform their services for us.
+          %h3.popups 4. OWNERSHIP
+          %br/
+          %p.paragraph4.margin-bottom 4.1 Ownership. As between you and RingCaptcha, RingCaptcha owns all right, title and interest in and to the RingCaptcha Offerings and Services and to all output and executables of the RingCaptcha Offerings and Services. Except for the license granted in Section 2.1 (License Grant), this Agreement grants you no right, title, or interest in any intellectual property owned or licensed by us, including the RingCaptcha Offerings and Brand Features (as defined below). You agree to abide by all applicable proprietary rights laws and other laws, as well as any additional copyright notices and restrictions contained in this Agreement.
+          %p.paragraph4.margin-bottom 4.2 Brand Features. We grant you a limited, non-exclusive license to display our name, logos and domain names (collectively, “Brand Features”) to promote and advertise your use of the RingCaptcha Offerings in accordance with this section. When you place the RingCaptcha Offerings on Your Site, you must not imply that Your Site is created or endorsed in any manner by RingCaptcha. You agree, however, not to remove, obscure, distort, or alter any of our Brand Features or display our Brand Features in any way that is misleading, defamatory, infringing, libelous, disparaging, obscene, or otherwise objectionable to RingCaptcha. All use by you of the Brand Features (including any goodwill associated therewith) will inure to the benefit of RingCaptcha. At no time during or after the term of this Agreement will you challenge or assist others to challenge the Brand Features (except to the extent such restriction is prohibited by law) or the registration thereof by RingCaptcha, nor will you attempt to register any trademarks that are confusingly similar in any way to any Brand Features. You must submit to us a copy or image of any media release or advertising that includes any the Brand Features by emailing us at hello@ringcaptcha.com
+          %p.paragraph4.margin-bottom 4.3 Modifications We may release subsequent versions of the RingCaptcha Offerings and require you to use the most recent version. Your continued use of the RingCaptcha Offerings on any website after such a release will be deemed your acceptance of the modifications.  We may also cease providing any prior version of the RingCaptcha Offerings at any time, at which point such version will be deprecated.
+          %h3.popups 5. SUPPORT
+          %br/
+          %p.paragraph4.margin-bottom We will use commercially reasonable efforts to provide the Services in accordance with historical uptime levels.  We may provide you with support, upgrades, or modifications for the RingCaptcha Offerings in our sole discretion. In the event we provide any support, it will be considered part of the RingCaptcha Offerings and Service for purposes of Section 8 (Disclaimer and Liability) and Section 9 (Indemnification) below, and we may terminate the provision of such support or modifications to you at any time without notice or liability to you. You understand and agree that you are solely responsible for providing user support and any other technical assistance for Your Site. We may redirect users and potential users of Your Site to your email address on file for purposes of answering general inquiries and support questions related to Your Site.
+          %h3.popups 6. FEES AND PAYMENT TERMS
+          %br/
+          %p.paragraph4.margin-bottom 6.1 Payment.  You agree to pay all fees or charges to your Account in accordance with the applicable fees, charges and billing terms in effect at the time a fee or charge is due and payable.  Unless otherwise agreed, all fees are billed in advance.] Users must provide RingCaptcha with valid credit card (Visa, MasterCard, or any other issuer accepted by us) or PayPal account (“Payment Provider”) as a condition up for the Services.  Your Payment Provider agreement governs use of the designated credit card or PayPal account, and must refer to that agreement and not the terms of this Agreement to determine its rights and responsibilities.  By providing RingCaptcha with your credit card number or PayPal account and associated payment information, you agree that we are authorized to immediately charge your Account for all fees and charges due and payable to RingCaptcha hereunder and that no additional consent is required.  You agree to immediately notify us of any change in your billing address or credit card or PayPal account used for payment hereunder.  We reserve the right at any time to change our prices and billing methods, either immediately upon posting on the Website or by e-mail delivery to you.
+          %p.paragraph4.margin-bottom 6.2 Charges; Minimum Commitment.  Upon creation of a Paid Account, you will be responsible for the payment of the applicable minimum monthly fee (the “Minimum Commitment”) regardless of whether you use the Service.  RingCaptcha shall draw down on your account balance each month based on the number of Transactions in which successful Transactions are made. As used herein, a “Transaction” means an HTTP request made via the Widget or API. In the event your account balance falls below 10% of the Minimum Commitment, we shall automatically charge the credit card you provided an amount equal to the Minimum Commitment plus any additional amounts designated by you to replenish your Account.  In the event any amount of the Minimum Commitment for any month has not been fully exhausted within two months of the payment of such Minimum Commitment, those remaining amounts will be paid to RingCaptcha and deducted from your Paid Account (“Commitment Expiration”).  For the avoidance of doubt, any amounts paid by you in excess of the Minimum Commitment (“Additional Payments”) will not be subject to the Commitment Expiration.
+          %p.paragraph4.margin-bottom 6.3 Taxes.  RingCaptcha’s fees are net of any applicable sales or use tax (“Sales Tax”).  If any Services, or payment for any Services, under this Agreement are subject to Sales Tax in any jurisdiction and you have not remitted the applicable Sales Tax to RingCaptcha, you will be responsible for the payment of such Sales Tax and any related penalties or interest to the relevant tax authority.
+          %p.paragraph4.margin-bottom 6.4 Refunds. Except as set forth below, all fees for the Services are non-refundable.  We may issue: (a) a complete refund for any payment made by you, in the event you request a complete refund within one (1) day of your applicable payment; or (b) refund for any Additional Payments made by you prorated for those Transactions already processed in accordance with this Agreement.
+          %h3.popups 7. TERM AND TERMINATION
+          %br/
+          %p.paragraph4.margin-bottom 7.1 Term. You agree that this Agreement will be deemed to be in effect upon the date on which you accept this Agreement, in accordance with the preamble.
+          %p.paragraph4.margin-bottom 7.2 Suspension and Termination. We may change, suspend, or discontinue the availability or any functionality of the RingCaptcha Offerings, or any aspect of your access to the RingCaptcha Offerings, at any time without notice to you and without incurring any liability to you. We may also impose limits on certain features and services or restrict your access to part or all of the RingCaptcha Offerings without notice to you and without incurring any liability to you. Furthermore, RingCaptcha may limit, suspend, or terminate your use of the RingCaptcha Offerings (and your rights under this Agreement) at any time. In addition, this Agreement will terminate automatically and without notice immediately upon any breach of the terms of this Agreement by you.  You may terminate this Agreement for any reason or no reason at all, at your convenience, by ceasing your use of the RingCaptcha Offerings.
+          %p.paragraph4.margin-bottom 7.3 Effect on Termination. Upon termination of this Agreement: (i) all rights and licenses granted will terminate immediately; and (ii) any and all payment obligations, if any, will be due. Neither party will be liable to the other party for damages of any sort resulting solely from the termination of this Agreement. Notwithstanding clause 6.4(i), RingCaptcha’s sole obligation as it relates to copies of, or references or links to, Your Site will be to, upon written request from you, make commercially reasonable efforts, as determined in its sole discretion, to remove all such references and links.
+          %p.paragraph4.margin-bottom 7.4 Survival. Sections 4.1 (Ownership), 4.2 (Brand Features), 6 (Fees and Payment Terms), 7.4 (Survival), and 9 (Disclaimer and Liability) through 12 (General) will survive any termination of this Agreement.
+          %h3.popups 8. DATA
+          %br/
+          %p.paragraph4.margin-bottom 8.1 User Data. RingCaptcha may collect certain information from end users of Your Site who use the RingCaptcha Offerings and Services, including hashed phone numbers, device identifiers, and IP addresses (“User Data”).  We may collect this User Data through the use of cookies.  You acknowledge and agree that you are solely responsible for providing all necessary notices and obtaining all necessary consents in connection with the display of our RingCaptcha Offerings on Your Site, including providing a legally sufficient privacy policy on Your Site which describes our collection and use of User Data.
+          %p.paragraph4.margin-bottom 8.2 Deletion of Data. Upon request, RingCaptcha will use reasonable efforts to delete of your password, name, credit card information and all related information associated with or inside your Account (or any part thereof), excluding data related to past Transactions.
+          %h3.popups 9. DISCLAIMER AND LIABILITY
+          %br/
+          %p.paragraph4.margin-bottom 9.1 Disclaimer. THE RINGCAPTCHA OFFERINGS ARE PROVIDED “AS IS,” “WHERE IS,” “WITH ALL FAULTS” AND WITH NO WARRANTY, EXPRESS OR IMPLIED, OF ANY KIND. RINGCAPTCHA EXPRESSLY DISCLAIMS ANY AND ALL WARRANTIES AND CONDITIONS, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTY OR CONDITION OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AVAILABILITY, SECURITY, TITLE AND/ NON-INFRINGEMENT. SOME ASPECTS OF THE RINGCAPTCHA OFFERINGS ARE EXPERIMENTAL AND HAVE NOT BEEN TESTED IN ANY MANNER. WE DO NOT REPRESENT, WARRANT, OR MAKE ANY CONDITION THAT THE RINGCAPTCHA OFFERINGS ARE FREE OF INACCURACIES, ERRORS, BUGS, OR INTERRUPTIONS, OR ARE RELIABLE, ACCURATE, COMPLETE, OR OTHERWISE VALID. WE ARE NOT RESPONSIBLE FOR ANY CONTENT OR OTHER MATERIAL DOWNLOADED OR OTHERWISE OBTAINED THROUGH THE USE OF THE WIDGET OR THE SERVICE, ALL OF WHICH IS OBTAINED AT YOUR OWN DISCRETION AND RISK. YOUR USE OF THE RINGCAPTCHA OFFERINGS IS AT YOUR OWN DISCRETION AND RISK, AND YOU WILL BE SOLELY RESPONSIBLE FOR ANY DAMAGE THAT RESULTS FROM USE OF THE RINGCAPTCHA OFFERINGS INCLUDING, BUT NOT LIMITED TO, FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR LOSS OF DATA. NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM US OR THROUGH OR FROM OUR SERVICES WILL CREATE ANY WARRANTY OR CONDITION NOT EXPRESSLY STATED IN THE USER AGREEMENT.
+          %p.paragraph4.margin-bottom 9.2 Limitation of Liability. WE WILL NOT, UNDER ANY CIRCUMSTANCES, BE LIABLE TO YOU FOR ANY INCIDENTAL, CONSEQUENTIAL, INDIRECT, PUNITIVE, SPECIAL, OR RELIANCE DAMAGES RELATED TO THIS AGREEMENT OR THE RINGCAPTCHA OFFERINGS. CONSEQUENTIAL DAMAGES INCLUDE, BUT ARE NOT LIMITED TO, LOST PROFITS, LOST REVENUES AND LOST BUSINESS OPPORTUNITIES, WHETHER YOU WERE OR SHOULD HAVE BEEN AWARE OF THE POSSIBILITY OF THESE DAMAGES. IN NO EVENT WILL OUR AGGREGATE LIABILITY UNDER THIS AGREEMENT OR RELATED TO THE RINGCAPTCHA OFFERINGS EXCEED THE AMOUNTS PAID BY YOU TO RINGCAPTCHA DURING THE SIX (6) MONTH PERIOD IMMEDIATELY PRECEDEING THE ACT(S) GIVING RISE TO LIABILITY HEREUNDER. SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES OR THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES. THE PARTIES HAVE NEGOTIATED THIS AGREEMENT WITH DUE REGARD FOR THE BUSINESS RISK ASSOCIATED WITH THE ARRANGEMENTS DESCRIBED IN THIS AGREEMENT.
+          %h3.popups 10. INDEMNIFICATION
+          %br/
+          %p.paragraph4.margin-bottom You will defend, indemnify and hold harmless RingCaptcha and its affiliates, and their respective directors, officers, agents, licensors, and other partners and employees from and against any third-party claim arising from or in any way related to Your Site, your use of the RingCaptcha Offerings, or your breach of any obligation herein, including any liability or expense arising from all claims, losses, damages (actual and consequential), suits, judgments, litigation costs and attorneys’ fees, of every kind and nature.
+          %h3.popups 11. GENERAL.
+          %br/
+          %p.paragraph4.margin-bottom 11.1 Entire Agreement; Amendment. This Agreement constitutes the entire agreement between you and RingCaptcha and governs your use of the RingCaptcha Offerings. If, through accessing or using the RingCaptcha Offerings, you utilize or obtain any product or service from a third party, you may additionally be subject to such third party's terms and conditions applicable thereto, and this Agreement will not affect your legal relationship with such third party.
+          %p.paragraph4.margin-bottom 11.2 Relationship of Parties. The Parties hereto are independent contractors. Nothing in this Agreement will be deemed to create an agency, employment, partnership, fiduciary, or joint venture relationship between the Parties. Neither Party is the representative of the other Party for any purpose and neither Party has the power or authority as agent, employee, or in any other capacity to represent, act for, bind, or otherwise create or assume any obligation on behalf of the other Party for any purpose whatsoever.
+          %p.paragraph4.margin-bottom 11.3 Governing Law. This Agreement will be governed in accordance with the laws of the state of [Colorado] without reference to its conflicts of law principles. The Parties agree that the exclusive jurisdiction of any actions arising out of this Agreement will be in the state or federal courts, as applicable, located in Denver, Colorado.
+          %p.paragraph4.margin-bottom 11.4 Severability. If any term or provision of this Agreement is determined to be illegal, unenforceable, or invalid in whole or in part for any reason, such term or provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.
+          %p.paragraph4.margin-bottom 11.5 Assignment. Neither Party may assign this Agreement or any of its rights or obligations hereunder, to a third party without the other Party’s written consent, except that a Party may assign this Agreement without such consent as a consequence of a merger, consolidation, reorganization, or sale of substantially all of its assets or of the business to which this Agreement pertains. Any assignment in violation of the foregoing is null and void. This Agreement inures to the benefit of and is binding upon the Parties hereto and their successors and assigns.
+          %p.paragraph4.margin-bottom 11.6 Waiver. Failure to enforce or a waiver by either Party of one default or breach of the other Party will not be considered to be a waiver of any subsequent default or breach.
+          %p.paragraph4.margin-bottom 11.7 Notices. All notices required or permitted hereunder will be in writing, delivered personally, by email, or by nationally recognized overnight courier (e.g., FedEx) at the Parties’ respective addresses set forth on the Cover Page. All notices will be deemed effective upon personal delivery, or when received if sent by email or overnight courier. You agree that RingCaptcha may send any privacy or other notices, disclosures, reports, documents, communications and other records regarding the Service (collectively, “Notices”) in electronic form to: (1) the email address that you provided during registration, or (2) by posting the Notice on the Service. The delivery of any Notice is effective when posted to the Service or sent by RingCaptcha (whichever first occurs), regardless of whether you read the Notice when you receive it or whether you actually receive the delivery. You can withdraw your consent to receive Notices electronically by canceling your Account. You must give notice to us in writing via email to hello@ringcaptcha.com or another address otherwise expressly provided.
+          %p.paragraph4.margin-bottom 11.8 Force Majeure. Neither party will be liable to the other for failure to fulfill obligations hereunder if such failure is due to causes beyond its control, including acts of God, earthquake, fire, flood, embargo, catastrophe, sabotage, utility or transmission failures, governmental prohibitions or regulations, national emergencies, insurrections, riots or war.
+          %p.paragraph4.margin-bottom 11.9 Government End Users. The RingCaptcha Offerings are “commercial computer software” and any associated documentation is “commercial computer software documentation,” pursuant to DFAR Section 227.7202 and FAR Section 12.212, as applicable. Any use, modification, reproduction, release, performance, display, or disclosure of the RingCaptcha Offerings or such documentation by the United States Government will be governed solely by the terms of this Agreement.
+          %p.paragraph4.margin-bottom 11.10 Remedies. All rights and remedies of the parties, under this Agreement, in law or at equity, are cumulative and may be exercised concurrently or separately. The exercise of one remedy will not be an election of that remedy to the exclusion of other remedies. A party’s breach or threatened breach of any of its covenants or agreements in this Agreement may cause irreparable injury that is inadequately compensable in monetary damages.
+    %header.navbar.navbar-ringscaptcha{:role => "navigation", :class => ("premium" if (current_user.user_profile.service_plan_id.nil? || current_user.user_profile.service_plan_id != 47))}
+      .container-fluid
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.glyphicon.glyphicon-chevron-down
+          %a.navbar-brand
+            %img{:src => "/assets/images/brand.png", :width => "106"}/
+        - if (current_user.user_profile.service_plan_id.nil? || current_user.user_profile.service_plan_id != 47)
+          .pull-left
+            %a.rockstar-badge.active
+              %img{:alt => "You Rock!", :src => "/assets/images/rockstar-icon.png", :width => "22"}/
+              .rockstar-text Rockstar mode on
+        - else
+          .pull-left
+            %a.-wfp-hover.rockstar-badge{:href => "/billing/checkout"}
+              %img{:alt => "Become a Rockstar", :src => "/assets/images/rockstar-icon-yellow.png", :width => "22"}/
+              .rockstar-text.become Go Rockstar
+        - if (current_user.user_profile.service_plan_id == 47)
+          .pull-right
+            - if @free_remainder < 200
+              %p.navbar-text.text-danger
+                You have reached your monthly allowed quota, please
+                %a{:href => "/billing/checkout"} become a rockstar
+                to keep your transactions
+            %a.user-balance{:alt => "Add Funds", :href => "/billing/checkout", :title => "Add Funds"}
+              %span Balance:
+              %strong
+                =@free_remainder.to_s + " SMS"
+            .dropdown.user-info
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => ""}
+                %figure
+                  %img{:alt => "Wyatt ", :src => "https://secure.gravatar.com/avatar/a5f2a8adbcfc971404bec65911b4fc19?s=30&r=g&d=mm"}/
+                %span.name=(current_user.first_name || 'User')
+                %span.arrow
+              %ul.dropdown-menu{:role => "menu"}
+                %li
+                  %a{:href => "/account"}
+                    %i.icon.icon-profile
+                    My profile
+                %li
+                  = link_to( destroy_user_session_path, :method => :delete) do
+                    %i.icon.icon-logout
+                    Logout
+        - else
+          .pull-right
+            %a.user-balance{:alt => "Add Funds", :href => "/billing/checkout", :title => "Add Funds"}
+              %span Balance:
+              %strong
+                =@free_remainder.to_s + " SMS"
+                <!-- TODO: needs to be changed to stripe account_balance -->
+            .dropdown.user-info
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => ""}
+                %figure
+                  %img{:alt => "Wyatt ", :src => "https://secure.gravatar.com/avatar/a5f2a8adbcfc971404bec65911b4fc19?s=30&r=g&d=mm"}/
+                %span.name=(current_user.first_name || 'User')
+                %span.arrow
+              %ul.dropdown-menu{:role => "menu"}
+                - if (current_user.user_profile.service_plan_id == 47)
+                  %li
+                    %a{:href => "/account"}
+                      %i.icon.icon-profile
+                      My profile
+                  %li
+                    = link_to( destroy_user_session_path, :method => :delete) do
+                      %i.icon.icon-logout
+                      Logout
+                - else
+                  %li
+                    %a{:href => "/account"}
+                      %i.icon.icon-profile
+                      My profile
+                  %li
+                    %a{:href => "/account/balance"}
+                      %i.icon.icon-balance
+                      My balance
+                  %li
+                    = link_to( destroy_user_session_path, :method => :delete) do
+                      %i.icon.icon-logout
+                      Logout
+
+
+    #sidebar-nav.navbar-collapse.collapse
+      %ul
+        - if @page_is == "DOCS"
+          %li.dashboard
+            %a{:href => "/dashboard"} Dashboard
+          %li.myApps
+            %a{:href => "/apps"} My Apps
+          %li.docs
+            %a.active{:href => "/docs"} Docs
+          %li.logout
+            = link_to( destroy_user_session_path, :method => :delete) do
+              Logout
+        - elsif @page_is == "APP"
+          %li.dashboard
+            %a{:href => "/dashboard"} Dashboard
+          %li.myApps
+            %a.active{:href => "/apps"} My Apps
+          %li.docs
+            %a{:href => "/docs"} Docs
+          %li.logout
+            = link_to( destroy_user_session_path, :method => :delete) do
+              Logout
+        - else
+          %li.dashboard
+            %a.active{:href => "/dashboard"} Dashboard
+          %li.myApps
+            %a{:href => "/apps"} My Apps
+          %li.docs
+            %a{:href => "/docs"} Docs
+          %li.logout
+            = link_to( destroy_user_session_path, :method => :delete) do
+              Logout
+
+    = yield
+    :javascript
+      var config = {
+        endpoint: "https://app.ringcaptcha.com",
+        customerKey: "#{current_user.user_profile.customer_key}"
+      };
+    :javascript
+      var baseUrl = 'https://my.ringcaptcha.com/';
+    %script{:src => "/assets/js/vendor.js"}
+    %script{:src => "/assets/js/app.js"}
+    :javascript
+      var $modal = $('#js-app-modal');
+      var $container = $('#pjax-modal-container', $modal);
+      var $overlay = $('.overlay', $modal);
+
+      $modal.modal({ show: false });
+
+      $(document).on('click', 'a[data-pjax-modal]', function (event) {
+          $.pjax.click(event, { container: $container, push: false, timeout: 0 });
+      });
+
+      $(document).on('submit', 'form[data-pjax]', function (event) {
+          var opts = { timeout: 0, push: false, fragment: false, container: $container };
+          $.pjax.submit(event, opts);
+      });
+
+      $(document).on('pjax:complete', function() {
+          $modal.modal('show');
+          $overlay.addClass('hide');
+      });
+
+      $(document).on('pjax:send', function(event, xhr, options) {
+          $overlay.removeClass('hide');
+      });
+
+      $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown, options) {
+          $overlay.addClass('hide');
+          event.preventDefault();
+      });
+
+      $(document).on('click', '.js-delete-app', function (event) {
+          $modal.modal('hide');
+          var url = $(this).attr('href');
+          bootbox.dialog({
+              message: 'Are you sure you want to delete this app?',
+              title: 'Delete App?',
+              buttons: {
+                  success: {
+                      label: "Yes, i'm sure",
+                      className: "btn-default",
+                      callback: function() {
+                          window.location = url;
+                      }
+                  }
+              }
+          });
+          return false;
+      });
+
+      $(document).on('click', '.secure-key', function () {
+          $('span', this).toggleClass('hide');
+      });
+
+      $(document).on('change', '#create_app_appType, #edit_app_appType', function () {
+          var $form = $(this).closest('form');
+          var $input = $('<input>', { type: 'hidden', id: 'isInvalid', name: 'isInvalid', value: true });
+          $input.appendTo($form);
+          $form.submit();
+          $input.remove();
+      });
+
+      $(document).on('click', '.js-delete-whitelist', function () {
+          $(this).closest('tr').remove();
+
+          return false;
+      });
+
+      $(document).on('click', '.js-delete-blacklist', function () {
+          $(this).closest('tr').remove();
+
+          return false;
+      });
+
+      $(document).on('click', '.js-delete-message', function () {
+          $(this).closest('.message-item').remove();
+
+          return false;
+      });
+
+      $(document).on('click', '.js-add-whitelist', function () {
+          var $whitelist = $('#whitelist table');
+          var $list = $('tbody', $whitelist);
+
+          var prototype = $('#whitelist-prototype').text();
+          var index = $whitelist.data('index');
+          var form = prototype.replace(/__name__/g, index);
+
+          $list.append(form);
+
+          $whitelist.data('index', index + 1);
+
+          return false;
+      });
+
+      $(document).on('click', '.js-add-blacklist', function () {
+          var $blacklist = $('#blacklist table');
+          var $list = $('tbody', $blacklist);
+
+          var prototype = $('#blacklist-prototype').text();
+          var index = $blacklist.data('index');
+          var form = prototype.replace(/__name__/g, index);
+
+          $list.append(form);
+
+          $blacklist.data('index', index + 1);
+
+          return false;
+      });
+
+      $(document).on('click', '.js-add-message', function () {
+          var index, selected;
+          var container = $(this).data('container');
+          var selector = $(this).data('selector');
+          var prototype = $(this).data('prototype');
+
+          // Get the container
+          container = $(container);
+
+          // Get the current index
+          index = container.data('index');
+
+          // Get the selector
+          selector = $(selector);
+
+          // Get the selected locale
+          selected = $('option:selected', selector);
+
+          // Get the prototype
+          prototype = $(prototype).text();
+
+          // Append the form to the container
+          container.append(prototype.replace(/__name__/g, index).replace(/__lang_name__/g, selected.text()).replace(/__lang_code__/g, selected.val()));
+
+          // Increment the current index
+          container.data('index', index + 1);
+
+          // Prevent default behavior
+          return false;
+      });
+
+      var opts = {
+        lines: 9, // The number of lines to draw
+        length: 20, // The length of each line
+        width: 4, // The line thickness
+        radius: 10, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#000', // #rgb or #rrggbb or array of colors
+        speed: 1, // Rounds per second
+        trail: 59, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: '50%', // Top position relative to parent
+        left: '50%' // Left position relative to parent
+      };
+
+      var spinner = new Spinner(opts).spin();
+
+      $('.spinner', $overlay).html(spinner.el);
+
+      var code = '1111';
+      var link = 'ringc.co/a6c51f8d';
+
+      $('body').on('keyup', '.js-message-tpl', function () {
+
+          var tpl = $(this).val().replace(/{{ code }}/i, code).replace(/{{ link }}/i, link);
+
+          $(this).siblings('.example').find('.example-inner').text(tpl);
+      });
+
+      $('[data-toggle="tooltip"]').tooltip()

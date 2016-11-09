@@ -1,0 +1,146 @@
+// Modal App
+.modal-app {
+	@include gradient-vertical($white, $grayBackground);
+	border-radius: $border-radius-large;
+	label {
+		font-size: 80%;
+	}
+}
+.modal-app-header {
+	margin-bottom: 20px;
+	h3 {
+		margin-top: 0;
+		padding-top: $wrapPadding/2;
+		text-align: center;
+	}
+}
+.modal-app-body {
+	padding: $wrapPadding/2  $wrapPadding;
+}
+.modal-app-footer {
+	background: $white;
+	border-top: 1px solid $blueLighterBorder;
+	margin-top: $wrapPadding/2;
+	text-align: right;
+	border-radius: 0 0 $border-radius-large $border-radius-large;
+	overflow: hidden;
+	p {
+		margin: 0;
+		padding: 12px 0 0 18px;
+	}
+
+	.btnmodal {
+		border: none;
+		display: inline-block;
+		font-weight: bold;
+		height: 46px;
+		line-height: 46px;
+		margin: 0 -2px;
+		padding: 0 18px;
+		@include gradient-vertical($white, $grayBackground);
+		color: $blue;
+		&:hover {
+			background: darken( $red, 10%);
+			@include transition(background, .25s);
+			color: $white;
+			text-decoration: none;
+		}
+	}
+	.btnmodal-red {
+		background: $red;
+		color: $white;
+	}
+	.btnmodal-disabled,
+	.btnmodal-disabled:hover {
+		background: lighten($red, 20%);
+		cursor: initial;
+	}
+}
+
+.welcome {
+	.modal-app-body {
+		text-align: center;
+	}
+	.take-a-tour {
+		text-decoration: underline;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+.steps {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	li {
+		list-style: none;
+		margin: 0;
+		padding: 10px 20px 10px 60px;
+		position: relative;
+		h4 {
+			color: $blueDark;
+			margin-top: 0;
+
+		}
+		span {
+			background: $blue;
+			border-radius: 50%;
+			color: $white;
+			display: block;
+			height: 30px;
+			left: 20px;
+			line-height: 30px;
+			overflow: hidden;
+			position: absolute;
+			text-align: center;
+			top: 10px;
+			width: 30px;
+		}
+		&.current {
+			background: $grayBackground;
+		}
+		&.completed {
+			span {
+				text-indent: -200px;
+				background: $green;
+				&:after {
+					background: image-url('sprite.png') no-repeat 0 -150px;
+					content: "";
+					display: block;
+					width: 25px;
+					height: 25px;
+					line-height: 30px;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					margin: -12.5px 0 0 -12.5px;
+				}
+			}
+		}
+	}
+}
+
+.modal-delete {
+	text-align: center;
+	.modal-title {
+		font-size: 2rem;
+	}
+}
+.modal-open .modal {
+  .dropdown-menu {  z-index: $zindex-dropdown + $zindex-modal; }
+  .dropdown.open { *z-index: $zindex-dropdown + $zindex-modal; }
+  .popover       {  z-index: $zindex-popover  + $zindex-modal; }
+  .tooltip       {  z-index: $zindex-tooltip  + $zindex-modal; }
+}
+.modal {
+	@include opacity(0);
+	@include transition(opacity .2s linear);
+  // -webkit-transition: opacity 0.3s linear;
+  //    -moz-transition: opacity 0.3s linear;
+  //      -o-transition: opacity 0.3s linear;
+  //         transition: opacity 0.3s linear;
+}
+.modal.in {
+	@include opacity(1);
+}

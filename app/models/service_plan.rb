@@ -1,0 +1,2 @@
+class ServicePlan < ApplicationRecord
+end

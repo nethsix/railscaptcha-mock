@@ -1,0 +1,2 @@
+class ProviderCost < ApplicationRecord
+end

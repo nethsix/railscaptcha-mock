@@ -1,0 +1,2 @@
+class RouteChange < ApplicationRecord
+end
